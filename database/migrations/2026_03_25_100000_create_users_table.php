@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreignId('idEmpleado')->constrained('empleados','idEmpleado');
+            $table->foreignId('idCliente')->constrained('clientes','idCliente');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
