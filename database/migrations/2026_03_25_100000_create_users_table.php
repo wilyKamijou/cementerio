@@ -22,6 +22,7 @@ return new class extends Migration
 
             $table->foreignId('idEmpleado')->constrained('empleados','idEmpleado');
             $table->foreignId('idCliente')->constrained('clientes','idCliente');
+            $table->foreignId('idRol')->constrained('roles','idRol');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

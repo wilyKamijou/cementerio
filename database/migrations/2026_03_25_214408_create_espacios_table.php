@@ -17,6 +17,7 @@ return new class extends Migration
         $table->foreignId('idDir')->constrained('direcciones','idDir');
         $table->foreignId('idDim')->constrained('dimensiones','idDim');
         $table->foreignId('idCem')->constrained('cementerios','idCem');
+        $table->foreignId('idCont')->constrained('contratos','idCont');
         $table->timestamps();
     });
     }

@@ -15,7 +15,6 @@ return new class extends Migration
         $table->id('idVenta');  // Llave primaria
         $table->date('fechaVenta');
         $table->decimal('precioTotal', 12, 2);
-        $table->string('estado');
 
         $table->foreignId('idEmpleado')->constrained('empleados','idEmpleado');
         $table->foreignId('idCliente')->constrained('clientes','idCliente');

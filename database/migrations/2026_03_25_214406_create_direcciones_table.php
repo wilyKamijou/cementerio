@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('seccion');
             $table->string('numero');
             $table->string('calle');
+            $table->string('fila');
             
             $table->timestamps();
 });

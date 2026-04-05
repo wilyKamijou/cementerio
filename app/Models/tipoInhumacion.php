@@ -2,9 +2,28 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tipoInhumacion extends Model
+class TipoInhumacion extends Model
 {
-    //
+    use HasFactory;
+
+    protected $primaryKey = 'idTipo';
+    public $incrementing = true;
+    protected $keyType = 'int';
+
+    protected $fillable = [
+        'nombre',
+        'precio',
+        'precioBase',
+        'capacidadMax',
+        'estado'
+    ];
+
+    // Relaciones
+    public function inhumaciones()
+    {
+        return $this->hasMany(Inhumacion::class, 'idTipo', 'idTipo');
+    }
 }

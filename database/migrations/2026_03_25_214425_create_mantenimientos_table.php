@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id('idMant'); // IdMantenimiento
             $table->foreignId('idEspacio')->constrained('espacios','idEspacio');
             $table->decimal('precio', 10, 2);
-            $table->date('fecha_mantenimiento');
+            $table->date('fechaMant');
             $table->text('descripcion')->nullable();
             $table->string('estado');
             $table->string('tipo');

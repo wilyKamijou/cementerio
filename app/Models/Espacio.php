@@ -2,9 +2,57 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Espacio extends Model
 {
-    //
+    use HasFactory;
+
+    protected $primaryKey = 'idEspacio';
+    protected $fillable = [
+        'idCem',
+        'idDim',
+        'idDir',
+        'idCont',
+        'precio',
+        'estado'
+   
+    ];
+
+    // Relaciones
+    public function cementerio()
+    {
+        return $this->belongsTo(Cementerio::class, 'idCem', 'idCem');
+    }
+
+    public function dimension()
+    {
+        return $this->belongsTo(Dimension::class, 'idDim', 'idDim');
+    }
+
+    public function direccion()
+    {
+        return $this->belongsTo(Direccion::class, 'idDir', 'idDir');
+    }
+
+    public function contrato()
+    {
+        return $this->belongsTo(contrato::class,'idCont','idCont');
+    }
+
+    public function inhumaciones()
+    {
+        return $this->hasMany(Inhumacion::class, 'idEspacio', 'idEspacio');
+    }
+
+    public function mantenimientos()
+    {
+        return $this->hasMany(Mantenimiento::class, 'idEspacio', 'idEspacio');
+    }
+
+    public function detalleVentas()
+    {
+        return $this->hasMany(DetalleVenta::class, 'idEspacio', 'idEspacio');
+    }
 }
