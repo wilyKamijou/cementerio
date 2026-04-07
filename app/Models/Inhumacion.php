@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Inhumacion extends Model
 {
     use HasFactory;
-
     protected $primaryKey = 'idInhum';
     protected $fillable = [
         'nombre',
