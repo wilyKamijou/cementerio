@@ -28,7 +28,7 @@ class Contrato extends Model
 
     public function venta()
     {
-        return $this->hasOne(Venta::class, 'idVenta', 'idVenta');
+        return $this->belongsTo(Venta::class, 'idVenta', 'idVenta');
     }
     
     public function espacio()

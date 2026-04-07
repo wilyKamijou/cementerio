@@ -21,7 +21,7 @@ class Venta extends Model
     // Relaciones
     public function contrato()
     {
-        return $this->belongsTo(Contrato::class, 'idCont', 'idCont');
+        return $this->hasOne(Contrato::class, 'idVenta', 'idVenta');
     }
 
     public function detalleVentas()
