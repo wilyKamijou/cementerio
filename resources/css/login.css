@@ -1,0 +1,251 @@
+/* ============================================
+   LOGIN STYLES - El Sepulturero Juan
+   ============================================ */
+
+/* Fondo general */
+body {
+    background: linear-gradient(135deg, #1a3f32 0%, #2c5e4a 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Contenedor principal */
+[x-guest-layout] {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+/* Tarjeta del formulario */
+form {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 0.5s ease;
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Títulos */
+.login-title {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #2c5e4a;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.login-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Grupos de campos */
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Labels */
+[x-input-label],
+label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+    display: block;
+    font-size: 0.9rem;
+}
+
+/* Campos de texto */
+[x-text-input],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    outline: none;
+    box-sizing: border-box;
+}
+
+[x-text-input]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #2c5e4a;
+    box-shadow: 0 0 0 3px rgba(44, 94, 74, 0.1);
+}
+
+/* Grupo de checkbox */
+.checkbox-group {
+    margin: 1.5rem 0;
+}
+
+.inline-flex.items-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #2c5e4a;
+}
+
+.checkbox-group span {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Grupo de botones */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Botón de login */
+[x-primary-button],
+.login-btn {
+    flex: 1;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #2c5e4a 0%, #1a3f32 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+[x-primary-button]:hover,
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(44, 94, 74, 0.4);
+}
+
+[x-primary-button]:active,
+.login-btn:active {
+    transform: translateY(0);
+}
+
+/* Enlace de olvidó contraseña */
+.forgot-link {
+    color: #2c5e4a;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s;
+    white-space: nowrap;
+}
+
+.forgot-link:hover {
+    color: #1a3f32;
+    text-decoration: underline;
+}
+
+/* Mensajes de error */
+[x-input-error] {
+    color: #dc3545;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+/* Mensaje de sesión */
+[x-auth-session-status] {
+    background: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    border-left: 4px solid #28a745;
+}
+
+/* Clases de utilidad */
+.mt-1 {
+    margin-top: 0.25rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.block {
+    display: block;
+}
+
+.w-full {
+    width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+
+    form {
+        padding: 1.5rem;
+    }
+
+    .login-title {
+        font-size: 1.3rem;
+    }
+
+    .login-subtitle {
+        font-size: 0.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .forgot-link {
+        text-align: center;
+        white-space: normal;
+    }
+
+    [x-text-input],
+    input[type="email"],
+    input[type="password"] {
+        padding: 10px 12px;
+    }
+}

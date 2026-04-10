@@ -28,11 +28,6 @@ class Contrato extends Model
 
     public function venta()
     {
-        return $this->belongsTo(Venta::class, 'idVenta', 'idVenta');
-    }
-    
-    public function espacio()
-    {
-        return $this->hasMany(Espacio::class,'idCont','idCont');
+        return $this->hasOne(Venta::class, 'idCont', 'idCont');
     }
 }

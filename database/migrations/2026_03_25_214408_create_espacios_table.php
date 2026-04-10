@@ -9,17 +9,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-   Schema::create('espacios', function (Blueprint $table) {
-        $table->id('idEspacio');
-        $table->decimal('precio', 10, 2);
-        $table->string('estado'); 
+        Schema::create('espacios', function (Blueprint $table) {
+            $table->id('idEspacio');
+            $table->decimal('precio', 10, 2);
+            $table->string('estado');
 
-        $table->foreignId('idDir')->constrained('direcciones','idDir');
-        $table->foreignId('idDim')->constrained('dimensiones','idDim');
-        $table->foreignId('idCem')->constrained('cementerios','idCem');
-        $table->foreignId('idCont')->constrained('contratos','idCont');
-        $table->timestamps();
-    });
+            $table->foreignId('idDir')->constrained('direcciones', 'idDir');
+            $table->foreignId('idDim')->constrained('dimensiones', 'idDim');
+            $table->foreignId('idCem')->constrained('cementerios', 'idCem');
+            //$table->foreignId('idCont')->constrained('contratos','idCont');
+            $table->timestamps();
+        });
     }
 
     public function down(): void

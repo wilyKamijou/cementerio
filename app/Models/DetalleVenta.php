@@ -8,10 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class DetalleVenta extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'idDetalle';
     protected $fillable = [
         'precioU',
-        'cantidad',
         'idVenta',
         'idEspacio'
     ];

@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::create('ventas', function (Blueprint $table) {
-        $table->id('idVenta');  // Llave primaria
-        $table->date('fechaVenta');
-        $table->decimal('precioTotal', 12, 2);
+        Schema::create('ventas', function (Blueprint $table) {
+            $table->id('idVenta');  // Llave primaria
+            $table->date('fechaVenta');
+            $table->decimal('precioTotal', 12, 2);
 
-        $table->foreignId('idEmpleado')->constrained('empleados','idEmpleado');
-        $table->foreignId('idCliente')->constrained('clientes','idCliente');
-        $table->timestamps();
-});
+            $table->foreignId('idEmpleado')->constrained('empleados', 'idEmpleado');
+            $table->foreignId('idCliente')->constrained('clientes', 'idCliente');
+            $table->foreignId('idCont')->unique()->constrained('contratos', 'idCont');
+            $table->timestamps();
+        });
     }
 
     /**

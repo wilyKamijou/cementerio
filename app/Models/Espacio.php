@@ -14,10 +14,9 @@ class Espacio extends Model
         'idCem',
         'idDim',
         'idDir',
-        'idCont',
         'precio',
         'estado'
-   
+
     ];
 
     // Relaciones
@@ -36,11 +35,6 @@ class Espacio extends Model
         return $this->belongsTo(Direccion::class, 'idDir', 'idDir');
     }
 
-    public function contrato()
-    {
-        return $this->belongsTo(contrato::class,'idCont','idCont');
-    }
-
     public function inhumaciones()
     {
         return $this->hasMany(Inhumacion::class, 'idEspacio', 'idEspacio');
@@ -53,6 +47,6 @@ class Espacio extends Model
 
     public function detalleVentas()
     {
-        return $this->hasMany(DetalleVenta::class, 'idEspacio', 'idEspacio');
+        return $this->hasOne(DetalleVenta::class, 'idEspacio', 'idEspacio');
     }
 }

@@ -16,9 +16,9 @@ class TipoInhumacion extends Model
     protected $fillable = [
         'nombre',
         'precio',
-        'precioBase',
         'capacidadMax',
-        'estado'
+        'estado',
+        'areaBase'
     ];
 
     // Relaciones

@@ -14,14 +14,15 @@ class Venta extends Model
         'fechaVenta',
         'precioTotal',
         'idEmpleado',
-        'idCliente'
+        'idCliente',
+        'idCont'
 
     ];
 
     // Relaciones
     public function contrato()
     {
-        return $this->hasOne(Contrato::class, 'idVenta', 'idVenta');
+        return $this->belongsTo(Contrato::class, 'idCont', 'idCont');
     }
 
     public function detalleVentas()
@@ -31,12 +32,12 @@ class Venta extends Model
 
     public function pagoCredito()
     {
-        return $this->belongsTo(PagoCredito::class, 'idVenta', 'idVenta');
+        return $this->hasOne(PagoCredito::class, 'idVenta', 'idVenta');
     }
 
     public function pagoContado()
     {
-        return $this->belongsTo(PagoContado::class, 'idVenta', 'idVenta');
+        return $this->hasOne(PagoContado::class, 'idVenta', 'idVenta');
     }
 
     public function cliente()
@@ -47,6 +48,5 @@ class Venta extends Model
     public function empleado()
     {
         return $this->belongsTo(empleado::class, 'idEmpleado', 'idEmpleado');
-    
     }
 }

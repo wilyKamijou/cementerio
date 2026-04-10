@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('tipoInhumacion', function (Blueprint $table) {
-        $table->id('idTipo');
-        $table->string('nombre');
-        $table->decimal('precio', 10, 2)->nullable();
-        $table->decimal('precioBase', 10, 2)->nullable();
-        $table->integer('capacidadMax')->nullable();
-        $table->string('estado');
-        $table->timestamps();
-});
+        Schema::create('tipoInhumacion', function (Blueprint $table) {
+            $table->id('idTipo');
+            $table->string('nombre');
+            $table->decimal('precio', 10, 2);
+            $table->integer('capacidadMax')->nullable();
+            $table->string('estado')->nullable();
+            $table->integer('areaBase');
+            $table->timestamps();
+        });
     }
 
     /**

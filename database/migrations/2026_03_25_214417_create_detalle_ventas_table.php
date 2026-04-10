@@ -12,11 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('detalleVentas', function (Blueprint $table) {
-            $table->id();
-            $table->decimal('precioU',10,2);
-            $table->decimal('cantidad',5);
-            $table->foreignId('idVenta')->unique()->constrained('ventas','idVenta');
-            $table->foreignId('idEspacio')->unique()->constrained('espacios','idEspacio');
+            $table->id('idDetalle');
+            $table->decimal('precioU', 10, 2);
+            $table->foreignId('idVenta')->constrained('ventas', 'idVenta');
+            $table->foreignId('idEspacio')->unique()->constrained('espacios', 'idEspacio');
             $table->timestamps();
         });
     }

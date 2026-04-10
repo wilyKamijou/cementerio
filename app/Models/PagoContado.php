@@ -18,6 +18,6 @@ class PagoContado extends Model
     // Relaciones
     public function venta()
     {
-        return $this->hasOne(Venta::class, 'idVenta', 'idVenta');
+        return $this->belongsTo(Venta::class, 'idCont', 'idCont');
     }
 }

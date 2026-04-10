@@ -14,11 +14,10 @@ return new class extends Migration
             $table->date('fechaContrato');
             $table->decimal('montoBase', 10, 2);
             $table->decimal('saldoPendiente', 10, 2);
-            $table->string('estado');
+            $table->string('estado')->nullable();
             $table->text('observacion')->nullable();
 
-            $table->foreignId('idVenta')->unique()->constrained('ventas','idVenta');
-            $table->foreignId('idCliente')->unique()->constrained('clientes','idCliente');
+            $table->foreignId('idCliente')->constrained('clientes', 'idCliente');
             $table->timestamps();
         });
     }
