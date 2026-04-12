@@ -8,35 +8,35 @@ const SistemaGestion = {
     ventas: [],
 
     // Métodos para interactuar con el sistema
-    nuevoContrato: function(datos) {
+    nuevoContrato: function (datos) {
         console.log('Creando nuevo contrato:', datos);
         this.contratos.push(datos);
         this.actualizarInterfaz();
         return this.contratos;
     },
 
-    registrarInhumacion: function(datos) {
+    registrarInhumacion: function (datos) {
         console.log('Registrando inhumación:', datos);
         this.inhumaciones.push(datos);
         this.actualizarInterfaz();
         return this.inhumaciones;
     },
 
-    solicitarMantenimiento: function(datos) {
+    solicitarMantenimiento: function (datos) {
         console.log('Solicitando mantenimiento:', datos);
         this.mantenimientos.push(datos);
         this.actualizarInterfaz();
         return this.mantenimientos;
     },
 
-    registrarVenta: function(datos, tipo) {
+    registrarVenta: function (datos, tipo) {
         console.log(`Registrando venta ${tipo}:`, datos);
-        this.ventas.push({...datos, tipo});
+        this.ventas.push({ ...datos, tipo });
         this.actualizarInterfaz();
         return this.ventas;
     },
 
-    actualizarInterfaz: function() {
+    actualizarInterfaz: function () {
         console.log('Interfaz actualizada');
         // Aquí iría la lógica para actualizar la UI con datos reales
     }
@@ -46,10 +46,10 @@ const SistemaGestion = {
 function initTabs() {
     const tabs = document.querySelectorAll('.tab');
     tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
+        tab.addEventListener('click', function () {
             tabs.forEach(t => t.classList.remove('active'));
             this.classList.add('active');
-            
+
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(c => c.classList.remove('active'));
             const target = document.getElementById(this.dataset.tab);
@@ -61,15 +61,15 @@ function initTabs() {
 function initActionButtons() {
     const actionBtns = document.querySelectorAll('.action-btn');
     actionBtns.forEach(btn => {
-        btn.addEventListener('mouseenter', function() {
+        btn.addEventListener('mouseenter', function () {
             this.style.transform = 'scale(1.05)';
         });
-        btn.addEventListener('mouseleave', function() {
+        btn.addEventListener('mouseleave', function () {
             this.style.transform = 'scale(1)';
         });
-        
+
         // Acciones específicas según el botón
-        btn.addEventListener('click', function(e) {
+        btn.addEventListener('click', function (e) {
             const texto = this.querySelector('span')?.innerText || this.innerText;
             if (texto.includes('Nuevo Contrato')) {
                 alert('Funcionalidad: Crear nuevo contrato');
@@ -89,20 +89,20 @@ function initActionButtons() {
 }
 
 function initForms() {
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Funcionalidad en desarrollo');
-        });
-    });
+    // const forms = document.querySelectorAll('form');
+    // forms.forEach(form => {
+    //     form.addEventListener('submit', function(e) {
+    //         e.preventDefault();
+    //         alert('Funcionalidad en desarrollo');
+    //     });
+    // });
 }
 
 function initButtons() {
     const buttons = document.querySelectorAll('button:not(.action-btn)');
     buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            if(!this.classList.contains('action-btn')) {
+        button.addEventListener('click', function () {
+            if (!this.classList.contains('action-btn')) {
                 alert('Funcionalidad en desarrollo: ' + this.innerText);
             }
         });
@@ -112,7 +112,7 @@ function initButtons() {
 function initSearch() {
     const searchBtn = document.querySelector('.search-btn');
     if (searchBtn) {
-        searchBtn.addEventListener('click', function() {
+        searchBtn.addEventListener('click', function () {
             const searchType = document.getElementById('searchType')?.value;
             const searchTerm = document.getElementById('searchTerm')?.value;
             if (searchTerm) {
@@ -127,9 +127,9 @@ function initSearch() {
 function initQuickRegister() {
     const quickRegisterBtn = document.getElementById('quickRegisterBtn');
     const quickRegisterType = document.getElementById('quickRegisterType');
-    
+
     if (quickRegisterBtn && quickRegisterType) {
-        quickRegisterBtn.addEventListener('click', function() {
+        quickRegisterBtn.addEventListener('click', function () {
             const tipo = quickRegisterType.options[quickRegisterType.selectedIndex]?.text;
             if (tipo && tipo !== 'Seleccionar tipo de registro') {
                 alert(`Funcionalidad en desarrollo: ${tipo}`);
@@ -146,14 +146,14 @@ function updateStats() {
 }
 
 // Inicializar todo cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     initTabs();
     initActionButtons();
     initForms();
     initButtons();
     initSearch();
     initQuickRegister();
-    
+
     // Intervalo de actualización cada 30 segundos
     setInterval(updateStats, 30000);
 });

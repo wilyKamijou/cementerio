@@ -1,3 +1,22 @@
+/* resources/css/app.css */
+
+/* 1. PRIMERO los @import */
+@import 'sepulturero.css';
+@import 'iniciar-sesion.css';
+@import 'gestionarUsuario/admin-usuarios.css';
+/* @import 'usuario-modal.css'; */
+
+/* Estilos específicos de cada modal */
+
+@import 'gestionarUsuario/usuario-crear.css';
+@import 'gestionarUsuario/usuario-editar.css';
+@import 'gestionarUsuario/rol-crear.css';
+@import 'gestionarUsuario/rol-editar-permisos.css';
+@import 'gestionarUsuario/permiso-crear.css';
+@import 'gestionarUsuario/empleado-crear.css';
+
+
+/* 2. DESPUÉS Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

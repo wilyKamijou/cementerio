@@ -33,10 +33,10 @@
         </div>
 
         <div class="user-modal-options">
-            <button class="modal-option-btn btn-back" id="closeModalOptionBtn">
+            {{-- <button class="modal-option-btn btn-back" id="closeModalOptionBtn">
                 <i class="fas fa-arrow-left"></i>
                 Volver
-            </button>
+            </button> --}}
             <button class="modal-option-btn btn-edit" id="editProfileBtn">
                 <i class="fas fa-user-edit"></i>
                 Editar datos personales

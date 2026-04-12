@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rol extends Model
 {
     use HasFactory;
-
+    protected $table = 'roles';
     protected $primaryKey = 'idRol';
     protected $fillable = [
         'nombre',
@@ -24,5 +24,10 @@ class Rol extends Model
     public function rolPermisos()
     {
         return $this->hasMany(rolPermiso::class, 'idRol', 'idRol');
+    }
+    public function permisos()
+    {
+        return $this->belongsToMany(Permiso::class, 'rolPermiso', 'idRol', 'idPer')
+            ->withTimestamps();
     }
 }

@@ -24,13 +24,13 @@ class Empleado extends Model
         return $this->hasOne(User::class, 'idEmpleado', 'idEmpleado');
     }
 
-     public function bitacora()
+    public function bitacora()
     {
-        return $this->hasMany(bitacora::class, 'idEmpleado', 'idEmpleado');
+        return $this->hasMany(Bitacora::class, 'idEmpleado', 'idEmpleado');
     }
 
     public function venta()
     {
-        return $this->hasMany(venta::class, 'idEmpleado','idEmpleado');
+        return $this->hasMany(venta::class, 'idEmpleado', 'idEmpleado');
     }
 }

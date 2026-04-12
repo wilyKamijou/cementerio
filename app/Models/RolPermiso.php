@@ -9,6 +9,7 @@ class RolPermiso extends Model
 {
     use HasFactory;
 
+    protected $table = 'rolPermiso';
     protected $primaryKey = 'id';
     protected $fillable = [
         'idRol',

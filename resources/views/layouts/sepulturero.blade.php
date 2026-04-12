@@ -15,11 +15,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
-    <!-- CSS con Vite -->
-    @vite(['resources/css/sepulturero.css'])
-    @vite(['resources/css/usuario-modal.css'])
-    @vite(['resources/js/usuario-modal.js'])
+    <!-- jQuery (necesario para Bootstrap y tu JS) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <!-- Bootstrap JS (para modals) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 👇 TE FALTA ESTO 👇 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS con Vite -->
+
+    @vite(['resources/js/app.js'])
+    @vite(['resources/css/app.css'])
 
 </head>
 
@@ -42,8 +49,8 @@
                             class="fas fa-tools"></i> Mantenimiento</a></li>
                 <li><a href="{{ route('sepulturero.ventas') }}" class="@yield('active_ventas', '')"><i
                             class="fas fa-chart-line"></i> Ventas</a></li>
-                <li><a href="{{ route('sepulturero.clientes') }}" class="@yield('active_clientes', '')"><i class="fas fa-users"></i>
-                        Clientes</a></li>
+                <li><a href="{{ route('admin.usuarios.index') }}" class="@yield('active_clientes', '')"><i
+                            class="fas fa-users"></i>Clientes</a></li>
             </ul>
 
             <!-- Botón que abre el modal -->

@@ -1,0 +1,63 @@
+/* resources/css/modals/usuario-editar.css */
+
+/* ========== MODAL EDITAR USUARIO ========== */
+#modalEditarUsuario .modal-content {
+    max-width: 800px;
+}
+
+#modalEditarUsuario .form-group {
+    margin-bottom: 1rem;
+}
+
+#modalEditarUsuario .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+#modalEditarUsuario .form-control {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+#modalEditarUsuario .form-control:focus {
+    border-color: #2c5e4a;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(44, 94, 74, 0.1);
+}
+
+#modalEditarUsuario .btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.3s;
+}
+
+#modalEditarUsuario .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+#modalEditarUsuario .btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+#modalEditarUsuario .btn-warning {
+    background-color: #ffc107;
+    color: #333;
+}
+
+#modalEditarUsuario .btn-warning:hover {
+    background-color: #e0a800;
+}
+
+@media (max-width: 768px) {
+    #modalEditarUsuario .modal-body {
+        padding: 15px;
+    }
+}

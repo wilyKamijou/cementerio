@@ -1,0 +1,140 @@
+/* resources/css/modals/empleado-crear.css */
+
+/* ========== MODAL CREAR EMPLEADO ========== */
+
+/* Fondo del modal con DIFUMINADO */
+#modalCrearEmpleado {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+}
+
+/* Animación de entrada del fondo */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+
+    to {
+        opacity: 1;
+        backdrop-filter: blur(8px);
+    }
+}
+
+#modalCrearEmpleado.fade {
+    animation: modalFadeIn 0.2s ease;
+}
+
+/* Backdrop difuminado */
+#modalCrearEmpleado .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(8px) !important;
+}
+
+/* Contenido del modal - SIN difuminado */
+#modalCrearEmpleado .modal-content {
+    border-radius: 16px;
+    border: none;
+    overflow: hidden;
+    background: white;
+    /* Asegurar que el contenido no herede el difuminado */
+    backdrop-filter: none;
+}
+
+/* Animación de deslizamiento para el contenido */
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#modalCrearEmpleado .modal-content {
+    animation: modalSlideIn 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+/* Tamaño del modal */
+#modalCrearEmpleado .modal-dialog {
+    max-width: 600px;
+}
+
+/* Cabecera */
+#modalCrearEmpleado .modal-header {
+    background: linear-gradient(135deg, #2c5e4a 0%, #1a3f32 100%);
+    padding: 1.25rem;
+}
+
+#modalCrearEmpleado .modal-header.bg-primary {
+    background: linear-gradient(135deg, #2c5e4a 0%, #1a3f32 100%) !important;
+}
+
+#modalCrearEmpleado .modal-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* Cuerpo */
+#modalCrearEmpleado .modal-body {
+    padding: 1.5rem;
+}
+
+/* Formularios */
+#modalCrearEmpleado .form-control {
+    border-radius: 10px;
+    border: 1.5px solid #e2e8f0;
+    padding: 10px 14px;
+    transition: all 0.2s;
+}
+
+#modalCrearEmpleado .form-control:focus {
+    border-color: #2c5e4a;
+    box-shadow: 0 0 0 3px rgba(44, 94, 74, 0.1);
+    outline: none;
+}
+
+#modalCrearEmpleado label {
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+/* Footer */
+#modalCrearEmpleado .modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Botones */
+#modalCrearEmpleado .btn {
+    padding: 10px 20px;
+    border-radius: 40px;
+    font-weight: 600;
+}
+
+#modalCrearEmpleado .btn-primary {
+    background: linear-gradient(135deg, #2c5e4a 0%, #1a3f32 100%);
+    border: none;
+}
+
+#modalCrearEmpleado .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(44, 94, 74, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #modalCrearEmpleado .modal-dialog {
+        max-width: 95%;
+        margin: 1rem;
+    }
+
+    #modalCrearEmpleado .modal-body {
+        padding: 1rem;
+    }
+}
