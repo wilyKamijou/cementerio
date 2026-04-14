@@ -358,6 +358,45 @@ td {
     gap: 1.5rem;
 }
 
+/* ========== BOTONES DE AUTENTICACIÓN ========== */
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-login-navbar,
+.btn-register-navbar {
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    font-size: 0.85rem;
+}
+
+.btn-login-navbar {
+    background: transparent;
+    color: #2c5e4a;
+    border: 1px solid #2c5e4a;
+}
+
+.btn-login-navbar:hover {
+    background: #2c5e4a;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-register-navbar {
+    background: #2c5e4a;
+    color: white;
+}
+
+.btn-register-navbar:hover {
+    background: #1a3f32;
+    transform: translateY(-2px);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .nav-links {
@@ -376,4 +415,13 @@ td {
         grid-template-columns: 1fr;
     }
 
+    .auth-buttons {
+        gap: 5px;
+    }
+
+    .btn-login-navbar,
+    .btn-register-navbar {
+        padding: 5px 10px;
+        font-size: 0.75rem;
+    }
 }

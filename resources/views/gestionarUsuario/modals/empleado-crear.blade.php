@@ -6,7 +6,7 @@
                 <h5 class="modal-title">
                     <i class="fas fa-user-tie"></i> Registrar Nuevo Empleado
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
             </div>
 
             <form id="formCrearEmpleado" method="POST">

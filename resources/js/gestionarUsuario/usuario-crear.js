@@ -18,7 +18,7 @@ $(document).ready(function () {
             $(this).prop('disabled', true);
             $(this).removeClass('btn-outline-success').addClass('btn-success');
         } else {
-            alert('Ingresa un nombre para el rol');
+            mostrarToast('⚠️ Ingresa un nombre para el rol', 'warning');
             $('#nuevoRolNombre').focus();
         }
     });
@@ -36,60 +36,58 @@ $(document).ready(function () {
     $('#formCrearUsuario').on('submit', function (e) {
         e.preventDefault();
 
-        // Validaciones
         const nombre = $('input[name="name"]').val().trim();
         const email = $('input[name="email"]').val().trim();
         const password = $('input[name="password"]').val();
         const passwordConfirm = $('input[name="password_confirmation"]').val();
 
         if (!nombre) {
-            alert('El nombre completo es requerido');
+            mostrarToast('❌ El nombre completo es requerido', 'danger');
             $('input[name="name"]').focus();
             return;
         }
 
         if (!email) {
-            alert('El email es requerido');
+            mostrarToast('❌ El email es requerido', 'danger');
             $('input[name="email"]').focus();
             return;
         }
 
         if (!password) {
-            alert('La contraseña es requerida');
+            mostrarToast('❌ La contraseña es requerida', 'danger');
             $('input[name="password"]').focus();
             return;
         }
 
         if (password !== passwordConfirm) {
-            alert('Las contraseñas no coinciden');
+            mostrarToast('❌ Las contraseñas no coinciden', 'danger');
             $('input[name="password"]').focus();
             return;
         }
 
-        // Deshabilitar botón mientras se envía
         const submitBtn = $(this).find('button[type="submit"]');
         const originalText = submitBtn.text();
         submitBtn.text('Guardando...').prop('disabled', true);
 
         $.ajax({
-            url: '/admin/usuarios',
+            url: '/admin/gestionarUsuarios',
             type: 'POST',
             data: $(this).serialize(),
             success: function (response) {
                 if (response.success) {
-                    alert('Usuario creado exitosamente');
-                    location.reload();
+                    mostrarToast('✅ ' + response.message, 'success');
+                    setTimeout(() => location.reload(), 1500);
                 } else {
-                    alert('Error: ' + (response.message || 'No se pudo crear el usuario'));
+                    mostrarToast('❌ ' + response.message, 'danger');
                     submitBtn.text(originalText).prop('disabled', false);
                 }
             },
             error: function (xhr) {
-                let errorMsg = 'Error al crear usuario';
+                let errorMsg = '❌ Error al crear usuario';
                 if (xhr.responseJSON && xhr.responseJSON.message) {
-                    errorMsg = xhr.responseJSON.message;
+                    errorMsg = '❌ ' + xhr.responseJSON.message;
                 }
-                alert(errorMsg);
+                mostrarToast(errorMsg, 'danger');
                 submitBtn.text(originalText).prop('disabled', false);
             }
         });
@@ -102,4 +100,18 @@ $(document).ready(function () {
         $('#btnPrepararNuevoRol').text('Preparar').prop('disabled', false).removeClass('btn-success').addClass('btn-outline-success');
         $('#nuevoRolNombre').val('');
     });
+
+    // ========== FUNCIÓN PARA MOSTRAR TOAST (esquina derecha) ==========
+    function mostrarToast(mensaje, tipo) {
+        const toast = $(`
+            <div class="toast-notification toast-${tipo}">
+                <i class="fas ${tipo === 'success' ? 'fa-check-circle' : tipo === 'danger' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                <span>${mensaje}</span>
+            </div>
+        `);
+        $('body').append(toast);
+        setTimeout(() => {
+            toast.fadeOut(300, function () { $(this).remove(); });
+        }, 3000);
+    }
 });

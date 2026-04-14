@@ -20,13 +20,39 @@
     margin: 0;
     font-size: 1.35rem;
     font-weight: 600;
+    color: white;
 }
 
 .card-body {
     padding: 1.5rem;
 }
 
-/* Tabla de usuarios */
+/* ========== BUSCADORES ========== */
+#buscarUsuario,
+#buscarEmpleado,
+#buscarRol,
+#buscarPermiso {
+    width: 100%;
+    max-width: 350px;
+    padding: 10px 16px;
+    border: 2px solid #e0e6ed;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    background: white;
+    margin-bottom: 1rem;
+}
+
+#buscarUsuario:focus,
+#buscarEmpleado:focus,
+#buscarRol:focus,
+#buscarPermiso:focus {
+    border-color: #2c5e4a;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(44, 94, 74, 0.1);
+}
+
+/* ========== TABLAS ========== */
 .usuarios-table {
     width: 100%;
     border-collapse: collapse;
@@ -64,24 +90,6 @@
     transform: scale(1.01);
 }
 
-/* Buscador */
-.buscador-input {
-    width: 100%;
-    max-width: 350px;
-    padding: 10px 16px;
-    border: 2px solid #e0e6ed;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-    background: white;
-}
-
-.buscador-input:focus {
-    border-color: #2c5e4a;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(44, 94, 74, 0.1);
-}
-
 /* ========== BADGES ========== */
 .badge-rol {
     display: inline-flex;
@@ -113,6 +121,11 @@
 
 .badge-default {
     background: linear-gradient(135deg, #6c757d 0%, #545b62 100%);
+    color: white;
+}
+
+.badge-info {
+    background: linear-gradient(135deg, #17a2b8 0%, #0e7a8b 100%);
     color: white;
 }
 
@@ -183,6 +196,34 @@
     }
 }
 
+/* ========== ESTILOS PARA LAS PESTAÑAS ========== */
+.nav-tabs {
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    color: #64748b;
+    font-weight: 600;
+    padding: 10px 20px;
+    transition: all 0.2s;
+}
+
+.nav-tabs .nav-link:hover {
+    color: #2c5e4a;
+    background: transparent;
+}
+
+.nav-tabs .nav-link.active {
+    color: #2c5e4a;
+    border-bottom: 3px solid #2c5e4a;
+    background: transparent;
+}
+
+.nav-tabs .nav-link i {
+    margin-right: 8px;
+}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
     .usuarios-table {
@@ -200,7 +241,15 @@
         text-align: center;
     }
 
-    .buscador-input {
+    #buscarUsuario,
+    #buscarEmpleado,
+    #buscarRol,
+    #buscarPermiso {
         max-width: 100%;
+    }
+
+    .nav-tabs .nav-link {
+        padding: 8px 12px;
+        font-size: 0.8rem;
     }
 }

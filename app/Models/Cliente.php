@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     use HasFactory;
-
+    protected   $table = 'clientes';
     protected $primaryKey = 'idCliente';
     protected $fillable = [
         'Ci',
@@ -31,6 +31,6 @@ class Cliente extends Model
 
     public function ventas()
     {
-        return $this->hasMany(Venta::class, 'idCliente','idCliente');
+        return $this->hasMany(Venta::class, 'idCliente', 'idCliente');
     }
 }

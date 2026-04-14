@@ -12,37 +12,44 @@ $(document).ready(function () {
     $('#formCrearEmpleado').on('submit', function (e) {
         e.preventDefault();
 
-        // Validaciones
-        const nombre = $('input[name="nombre"]').val().trim();
-        const paterno = $('input[name="paterno"]').val().trim();
-        const telefono = $('input[name="telefono"]').val().trim();
+        // 👇 IMPORTANTE: Buscar SOLO dentro de este formulario
+        const form = $(this);
+
+        const nombre = form.find('input[name="nombre"]').val().trim();
+        const paterno = form.find('input[name="paterno"]').val().trim();
+        const telefono = form.find('input[name="telefono"]').val().trim();
+
+        // Debug
+        console.log('Nombre (dentro del form):', nombre);
+        console.log('Paterno (dentro del form):', paterno);
+        console.log('Teléfono (dentro del form):', telefono);
 
         if (!nombre) {
             alert('El nombre es requerido');
-            $('input[name="nombre"]').focus();
+            form.find('input[name="nombre"]').focus();
             return;
         }
 
         if (!paterno) {
             alert('El apellido paterno es requerido');
-            $('input[name="paterno"]').focus();
+            form.find('input[name="paterno"]').focus();
             return;
         }
 
         if (!telefono) {
             alert('El teléfono es requerido');
-            $('input[name="telefono"]').focus();
+            form.find('input[name="telefono"]').focus();
             return;
         }
 
-        const submitBtn = $(this).find('button[type="submit"]');
+        const submitBtn = form.find('button[type="submit"]');
         const originalText = submitBtn.html();
         submitBtn.html('<i class="fas fa-spinner fa-spin"></i> Guardando...').prop('disabled', true);
 
         $.ajax({
             url: '/admin/empleados',
             type: 'POST',
-            data: $(this).serialize(),
+            data: form.serialize(),
             success: function (response) {
                 if (response.success) {
                     alert('✅ Empleado creado exitosamente');

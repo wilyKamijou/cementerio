@@ -1,20 +1,24 @@
 {{-- resources/views/landing/index.blade.php --}}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cementerio El Sepulturero Juan - Descanso y Serenidad</title>
-    
+
     <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+
     <!-- Google Fonts para tipografías elegantes -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
     <!-- CSS con Vite -->
     @vite(['resources/css/sepulturero-web.css'])
 </head>
+
 <body>
     <header>
         <nav>
@@ -28,11 +32,23 @@
                 <a href="#servicios">Servicios</a>
                 <a href="#espacios">Espacios</a>
                 <a href="#beneficios">Beneficios</a>
-                {{-- <a href="#galeria">Galería</a> --}}
                 <a href="#faq">FAQ</a>
-                {{-- <a href="#testimonios">Testimonios</a> --}}
                 <a href="#contacto">Contacto</a>
-                <a href="{{ route('login') }}">Iniciar sesion</a>
+
+                <!-- 👇 ENLACE QUE CAMBIA SEGÚN AUTENTICACIÓN 👇 -->
+                @auth
+                    <form method="POST" action="{{ route('logout') }}" style="display: inline; margin: 0;">
+                        @csrf
+                        <button type="submit"
+                            style="background: none; border: none; color: #555; font-weight: 500; cursor: pointer; font-family: inherit; font-size: inherit;">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+                    </a>
+                @endauth
             </div>
         </nav>
     </header>
@@ -43,7 +59,8 @@
             <div class="hero-content">
                 <h1>El Sepulturero Juan</h1>
                 <p>Donde el descanso eterno encuentra paz y serenidad</p>
-                <p style="font-size: 1.1rem; margin-bottom: 2rem;">Un lugar digno y tranquilo para honrar la memoria de sus seres queridos</p>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">Un lugar digno y tranquilo para honrar la memoria de
+                    sus seres queridos</p>
                 <div class="hero-buttons">
                     <a href="#servicios" class="btn btn-primary">Nuestros Servicios</a>
                     <a href="#contacto" class="btn btn-secondary">Contáctenos</a>
@@ -57,8 +74,14 @@
                 <h2>Sobre Nosotros</h2>
                 <div class="about-content">
                     <div class="about-text">
-                        <p>Fundado hace más de 50 años por Juan Martínez, "El Sepulturero Juan" nació de un profundo respeto por la dignidad humana y el deseo de ofrecer un lugar de descanso eterno que transmitiera paz y serenidad. Lo que comenzó como un pequeño cementerio familiar, hoy es un espacio de 10 hectáreas cuidadosamente diseñado para honrar la memoria de quienes partieron.</p>
-                        <p>Nuestra historia está marcada por el compromiso con las familias que confían en nosotros en sus momentos más difíciles, ofreciendo no solo un lugar de descanso, sino un espacio donde el recuerdo florece en un entorno de belleza y tranquilidad.</p>
+                        <p>Fundado hace más de 50 años por Juan Martínez, "El Sepulturero Juan" nació de un profundo
+                            respeto por la dignidad humana y el deseo de ofrecer un lugar de descanso eterno que
+                            transmitiera paz y serenidad. Lo que comenzó como un pequeño cementerio familiar, hoy es un
+                            espacio de 10 hectáreas cuidadosamente diseñado para honrar la memoria de quienes partieron.
+                        </p>
+                        <p>Nuestra historia está marcada por el compromiso con las familias que confían en nosotros en
+                            sus momentos más difíciles, ofreciendo no solo un lugar de descanso, sino un espacio donde
+                            el recuerdo florece en un entorno de belleza y tranquilidad.</p>
                     </div>
                     <div class="values">
                         <div class="value-item">
@@ -89,7 +112,8 @@
                     <div class="service-card">
                         <i class="fas fa-file-contract"></i>
                         <h3>Contratos Funerarios</h3>
-                        <p>Planes personalizados para espacios funerarios con total transparencia y seguridad jurídica</p>
+                        <p>Planes personalizados para espacios funerarios con total transparencia y seguridad jurídica
+                        </p>
                     </div>
                     <div class="service-card">
                         <i class="fas fa-dove"></i>
@@ -130,19 +154,23 @@
             <div class="container">
                 <h2>Espacios Funerarios</h2>
                 <div class="spaces-grid">
-                    <div class="space-card" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')">
+                    <div class="space-card"
+                        style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')">
                         <h3>Nichos</h3>
                         <p>Espacios individuales en nuestros jardines verticales, rodeados de áreas verdes</p>
                     </div>
-                    <div class="space-card" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')">
+                    <div class="space-card"
+                        style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')">
                         <h3>Mausoleos</h3>
                         <p>Estructuras privadas y familiares con diseños arquitectónicos personalizados</p>
                     </div>
-                    <div class="space-card" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')">
+                    <div class="space-card"
+                        style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')">
                         <h3>Lotes Familiares</h3>
                         <p>Terrenos espaciosos para varias generaciones, con posibilidad de jardinería propia</p>
                     </div>
-                    <div class="space-card" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')">
+                    <div class="space-card"
+                        style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')">
                         <h3>Espacios Individuales</h3>
                         <p>Tumbas tradicionales en áreas tranquilas con mantenimiento incluido</p>
                     </div>
@@ -184,21 +212,6 @@
             </div>
         </section>
 
-        <!-- Galería 
-        <section id="galeria" class="section-light">
-            <div class="container">
-                <h2>Galería</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')"></div>
-                    <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')"></div>
-                    <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')"></div>
-                    <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')"></div>
-                    <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')"></div>
-                    <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')"></div>
-                </div>
-            </div>
-        </section>
-        -->
         <!-- Preguntas Frecuentes -->
         <section id="faq" class="section-gray">
             <div class="container">
@@ -206,45 +219,28 @@
                 <div class="faq-grid">
                     <div class="faq-item">
                         <h3>¿Cómo adquirir un espacio funerario?</h3>
-                        <p>Puede contactarnos directamente, visitar nuestras instalaciones o llenar el formulario de contacto. Un asesor le guiará en todo el proceso.</p>
+                        <p>Puede contactarnos directamente, visitar nuestras instalaciones o llenar el formulario de
+                            contacto. Un asesor le guiará en todo el proceso.</p>
                     </div>
                     <div class="faq-item">
                         <h3>¿Se puede comprar al crédito?</h3>
-                        <p>Sí, ofrecemos planes de financiamiento de hasta 36 meses con tasas preferenciales. Consulte con nuestros asesores.</p>
+                        <p>Sí, ofrecemos planes de financiamiento de hasta 36 meses con tasas preferenciales. Consulte
+                            con nuestros asesores.</p>
                     </div>
                     <div class="faq-item">
                         <h3>¿Qué incluye el mantenimiento?</h3>
-                        <p>Incluye limpieza diaria, jardinería, riego automático, iluminación y seguridad permanente.</p>
+                        <p>Incluye limpieza diaria, jardinería, riego automático, iluminación y seguridad permanente.
+                        </p>
                     </div>
                     <div class="faq-item">
                         <h3>¿Cómo se realiza una inhumación?</h3>
-                        <p>Coordinamos todos los detalles con la familia, incluyendo horarios, servicio religioso si se desea, y trámites necesarios.</p>
+                        <p>Coordinamos todos los detalles con la familia, incluyendo horarios, servicio religioso si se
+                            desea, y trámites necesarios.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Testimonios 
-        <section id="testimonios" class="section-light">
-            <div class="container">
-                <h2>Testimonios</h2>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <p>"Encontrar un lugar tan hermoso para mi madre nos dio tranquilidad. El trato del personal fue excepcional en un momento tan difícil."</p>
-                        <p class="testimonial-author">- Familia Rodríguez</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <p>"La paz que se respira en este lugar es única. Agradecemos el respeto y la dignidad con que tratan a nuestros seres queridos."</p>
-                        <p class="testimonial-author">- María González</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <p>"Excelente atención y facilidades de pago. El mantenimiento es impecable, siempre todo limpio y cuidado."</p>
-                        <p class="testimonial-author">- Familia Martínez</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        -->
         <!-- Contacto -->
         <section id="contacto" class="section-gray">
             <div class="container">
@@ -265,7 +261,8 @@
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>
-                            <p>Lunes a Viernes: 8:00 - 18:00<br>Sábados: 9:00 - 14:00<br>Domingos: Cerrado (solo visitas)</p>
+                            <p>Lunes a Viernes: 8:00 - 18:00<br>Sábados: 9:00 - 14:00<br>Domingos: Cerrado (solo
+                                visitas)</p>
                         </div>
                     </div>
                     <form class="contact-form">
@@ -285,7 +282,9 @@
                     </form>
                 </div>
                 <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343005!2d-73.98510768458426!3d40.74881797932769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b30eac9f%3A0xaca05ca48ab5ac2c!2sEmpire%20State%20Building!5e0!3m2!1ses!2smx!4v1620000000000!5m2!1ses!2smx" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343005!2d-73.98510768458426!3d40.74881797932769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b30eac9f%3A0xaca05ca48ab5ac2c!2sEmpire%20State%20Building!5e0!3m2!1ses!2smx!4v1620000000000!5m2!1ses!2smx"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </section>
@@ -333,4 +332,5 @@
     <!-- JavaScript con Vite -->
     @vite(['resources/js/sepulturero-web.js'])
 </body>
+
 </html>
