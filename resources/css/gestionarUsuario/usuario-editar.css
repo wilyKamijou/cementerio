@@ -1,63 +1,228 @@
 /* resources/css/modals/usuario-editar.css */
 
-/* ========== MODAL EDITAR USUARIO ========== */
-#modalEditarUsuario .modal-content {
-    max-width: 800px;
+/* ========== MODAL EDITAR USUARIO - ESTILO MODERNO ========== */
+
+/* Fondo difuminado */
+#modalEditarUsuario {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
 }
 
+/* Contenido del modal */
+#modalEditarUsuario .modal-content {
+    max-width: 800px;
+    border-radius: 24px;
+    border: none;
+    overflow: hidden;
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Animación de entrada */
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-40px) scale(0.96);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+#modalEditarUsuario .modal-content {
+    animation: modalSlideIn 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+/* Cabecera */
+#modalEditarUsuario .modal-header {
+    background: linear-gradient(135deg, #e6b800 0%, #cc9900 100%);
+    padding: 1.5rem;
+    border-bottom: none;
+    position: relative;
+    overflow: hidden;
+}
+
+#modalEditarUsuario .modal-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+#modalEditarUsuario .modal-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+#modalEditarUsuario .modal-title i {
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    border-radius: 50%;
+}
+
+/* Botón cerrar */
+#modalEditarUsuario .btn-close {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    padding: 8px;
+    opacity: 0.8;
+    transition: all 0.2s;
+}
+
+#modalEditarUsuario .btn-close:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+/* Cuerpo del modal */
+#modalEditarUsuario .modal-body {
+    padding: 1.75rem;
+    background: #ffffff;
+}
+
+/* Títulos de sección */
+#modalEditarUsuario h6 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1a3f32;
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e8f5e9;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Grupos de formulario */
 #modalEditarUsuario .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
 }
 
 #modalEditarUsuario .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #1e293b;
+    letter-spacing: 0.3px;
 }
 
+/* Inputs modernos */
 #modalEditarUsuario .form-control {
     width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    font-size: 1rem;
+    padding: 10px 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    background: #fafbfc;
+}
+
+#modalEditarUsuario .form-control:hover {
+    border-color: #cbd5e1;
+    background: white;
 }
 
 #modalEditarUsuario .form-control:focus {
-    border-color: #2c5e4a;
+    border-color: #cc9900;
     outline: none;
-    box-shadow: 0 0 0 3px rgba(44, 94, 74, 0.1);
+    box-shadow: 0 0 0 4px rgba(204, 153, 0, 0.15);
+    background: white;
 }
 
-#modalEditarUsuario .btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
+/* Selects */
+#modalEditarUsuario select.form-control {
     cursor: pointer;
-    font-size: 0.875rem;
-    transition: all 0.3s;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23cc9900' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+/* Footer */
+#modalEditarUsuario .modal-footer {
+    padding: 1rem 1.75rem 1.75rem;
+    border-top: 1px solid #eef2f6;
+    background: #fafbfc;
+    gap: 12px;
+}
+
+/* Botones */
+#modalEditarUsuario .btn {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
 }
 
 #modalEditarUsuario .btn-secondary {
-    background-color: #6c757d;
-    color: white;
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
 }
 
 #modalEditarUsuario .btn-secondary:hover {
-    background-color: #5a6268;
+    background: #e2e8f0;
+    transform: translateY(-2px);
+    color: #1e293b;
 }
 
 #modalEditarUsuario .btn-warning {
-    background-color: #ffc107;
-    color: #333;
+    background: linear-gradient(135deg, #e6b800 0%, #cc9900 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(204, 153, 0, 0.25);
 }
 
 #modalEditarUsuario .btn-warning:hover {
-    background-color: #e0a800;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(204, 153, 0, 0.35);
 }
 
+#modalEditarUsuario .btn-warning i {
+    margin-right: 6px;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
+    #modalEditarUsuario .modal-dialog {
+        max-width: 95%;
+        margin: 1rem auto;
+    }
+
     #modalEditarUsuario .modal-body {
-        padding: 15px;
+        padding: 1.25rem;
+    }
+
+    #modalEditarUsuario .modal-header {
+        padding: 1.25rem;
+    }
+
+    #modalEditarUsuario .modal-title {
+        font-size: 1.1rem;
+    }
+
+    #modalEditarUsuario .form-control {
+        padding: 8px 12px;
+    }
+
+    #modalEditarUsuario .btn {
+        padding: 8px 18px;
     }
 }

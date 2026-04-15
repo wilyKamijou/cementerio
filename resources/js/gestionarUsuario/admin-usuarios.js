@@ -27,88 +27,13 @@ $(document).ready(function () {
 
     // ========== 1. GESTIÓN DE USUARIOS ==========
 
-    // Abrir modal de crear usuario
-    $('#btnCrearUsuario').click(function () {
-        $('#modalCrearUsuario').modal('show');
-    });
-
-    // Crear usuario
-    $('#formCrearUsuario').submit(function (e) {
-        e.preventDefault();
-        mostrarLoading();
-
-        $.ajax({
-            url: '/admin/gestionarUsuarios',
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function (response) {
-                if (response.success) {
-                    mostrarMensaje('success', 'Usuario creado exitosamente');
-                    setTimeout(() => location.reload(), 1500);
-                }
-            },
-            error: function (xhr) {
-                let mensaje = 'Error al crear usuario';
-                if (xhr.responseJSON && xhr.responseJSON.message) {
-                    mensaje = xhr.responseJSON.message;
-                }
-                mostrarMensaje('danger', mensaje);
-            },
-            complete: function () {
-                ocultarLoading();
-            }
-        });
-    });
-
-    // Editar usuario
-    $(document).on('click', '.editar-usuario', function () {
-        const id = $(this).data('id');
-        mostrarLoading();
-
-        $.get('/admin/gestionarUsuarios/' + id, function (data) {
-            $('#edit_usuario_id').val(data.id);
-            $('#edit_nombre').val(data.name);
-            $('#edit_email').val(data.email);
-            $('#edit_idRol').val(data.idRol);
-            $('#edit_idEmpleado').val(data.idEmpleado);
-            $('#edit_idCliente').val(data.idCliente);
-            $('#modalEditarUsuario').modal('show');
-            ocultarLoading();
-        });
-    });
-
-    // Actualizar usuario
-    $('#formEditarUsuario').submit(function (e) {
-        e.preventDefault();
-        const id = $('#edit_usuario_id').val();
-        mostrarLoading();
-
-        $.ajax({
-            url: '/admin/gestionarUsuarios/' + id,
-            type: 'PUT',
-            data: $(this).serialize(),
-            success: function (response) {
-                if (response.success) {
-                    mostrarMensaje('success', 'Usuario actualizado exitosamente');
-                    setTimeout(() => location.reload(), 1500);
-                }
-            },
-            error: function () {
-                mostrarMensaje('danger', 'Error al actualizar usuario');
-            },
-            complete: function () {
-                ocultarLoading();
-            }
-        });
-    });
-
     // Eliminar usuario
     $(document).on('click', '.eliminar-usuario', function () {
         const id = $(this).data('id');
         if (confirm('¿Estás seguro de eliminar este usuario?')) {
             mostrarLoading();
             $.ajax({
-                url: '/admin/gestionarUsuarios/' + id,
+                url: '/admin/usuarios/' + id,
                 type: 'DELETE',
                 data: { _token: $('meta[name="csrf-token"]').attr('content') },
                 success: function (response) {
@@ -170,112 +95,8 @@ $(document).ready(function () {
         });
     });
 
-    // ========== 3. GESTIÓN DE ROLES ==========
+    // // ========== 3. GESTIÓN DE ROLES ==========
 
-    // Abrir modal de crear rol
-    $('#btnCrearRol').click(function () {
-        $('#modalCrearRol').modal('show');
-    });
-
-    // Crear rol
-    $('#formCrearRol').submit(function (e) {
-        e.preventDefault();
-        mostrarLoading();
-
-        $.ajax({
-            url: '/admin/gestionarUsuarios/roles',
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function (response) {
-                if (response.success) {
-                    mostrarMensaje('success', 'Rol creado exitosamente');
-                    setTimeout(() => location.reload(), 1500);
-                }
-            },
-            error: function () {
-                mostrarMensaje('danger', 'Error al crear rol');
-            },
-            complete: function () {
-                ocultarLoading();
-            }
-        });
-    });
-
-    // Editar permisos de un rol
-    $(document).on('click', '.editar-permisos-rol', function () {
-        const id = $(this).data('id');
-        rolSeleccionadoId = id;
-        mostrarLoading();
-
-        $.get('/admin/gestionarUsuarios/roles/' + id + '/permisos', function (data) {
-            $('#edit_rol_id').val(data.rol.idRol);
-            $('#edit_rol_nombre').val(data.rol.nombre);
-            $('#edit_rol_descripcion').val(data.rol.descripcion);
-
-            $('.permiso-checkbox').each(function () {
-                const permisoId = $(this).val();
-                if (data.permisos_asignados.includes(parseInt(permisoId))) {
-                    $(this).prop('checked', true);
-                } else {
-                    $(this).prop('checked', false);
-                }
-            });
-
-            $('#modalEditarPermisosRol').modal('show');
-            ocultarLoading();
-        });
-    });
-
-    // Actualizar permisos del rol
-    $('#formEditarPermisosRol').submit(function (e) {
-        e.preventDefault();
-        const id = $('#edit_rol_id').val();
-        mostrarLoading();
-
-        $.ajax({
-            url: '/admin/gestionarUsuarios/roles/' + id,
-            type: 'PUT',
-            data: $(this).serialize(),
-            success: function (response) {
-                if (response.success) {
-                    mostrarMensaje('success', 'Permisos actualizados exitosamente');
-                    $('#modalEditarPermisosRol').modal('hide');
-                    setTimeout(() => location.reload(), 1500);
-                }
-            },
-            error: function () {
-                mostrarMensaje('danger', 'Error al actualizar permisos');
-            },
-            complete: function () {
-                ocultarLoading();
-            }
-        });
-    });
-
-    // Eliminar rol
-    $(document).on('click', '.eliminar-rol', function () {
-        const id = $(this).data('id');
-        if (confirm('¿Estás seguro de eliminar este rol?')) {
-            mostrarLoading();
-            $.ajax({
-                url: '/admin/gestionarUsuarios/roles/' + id,
-                type: 'DELETE',
-                data: { _token: $('meta[name="csrf-token"]').attr('content') },
-                success: function (response) {
-                    if (response.success) {
-                        mostrarMensaje('success', 'Rol eliminado exitosamente');
-                        setTimeout(() => location.reload(), 1500);
-                    }
-                },
-                error: function () {
-                    mostrarMensaje('danger', 'Error al eliminar rol');
-                },
-                complete: function () {
-                    ocultarLoading();
-                }
-            });
-        }
-    });
 
     // Buscar rol
     $('#buscarRol').on('keyup', function () {
@@ -340,6 +161,26 @@ $(document).ready(function () {
             });
         }
     });
+    // Pestañas manuales
+    document.querySelectorAll('[data-tab]').forEach(button => {
+        button.addEventListener('click', function () {
+            const tabId = this.getAttribute('data-tab');
+
+            // Cambiar estilo de botones
+            document.querySelectorAll('[data-tab]').forEach(btn => {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-outline-primary');
+            });
+            this.classList.remove('btn-outline-primary');
+            this.classList.add('btn-primary');
+
+            // Mostrar contenido correspondiente
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.style.display = 'none';
+            });
+            document.getElementById(`tab-${tabId}`).style.display = 'block';
+        });
+    });
 
     // Buscar permiso
     $('#buscarPermiso').on('keyup', function () {
@@ -348,4 +189,12 @@ $(document).ready(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(valor) > -1);
         });
     });
+    // Buscar en tabla rol-permisos
+    $('#buscarRolPermiso').on('keyup', function () {
+        const valor = $(this).val().toLowerCase();
+        $('.fila-rol-permiso').filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(valor) > -1);
+        });
+    });
+
 });

@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             // puedes agregar más middlewares aquí
         ]);
     })
+
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();

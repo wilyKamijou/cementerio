@@ -9,6 +9,7 @@ import './gestionarUsuario/rol-editar-permisos.js';
 import './gestionarUsuario/usuario-crear.js';
 import './gestionarUsuario/usuario-editar.js';
 import './gestionarUsuario/empleado-crear.js'
+import './gestionarUsuario/empleado-editar.js'
 
 
 import Alpine from 'alpinejs';

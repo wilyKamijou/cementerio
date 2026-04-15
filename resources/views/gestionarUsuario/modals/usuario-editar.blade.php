@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header bg-warning text-white">
                 <h5 class="modal-title"><i class="fas fa-user-edit"></i> Editar Usuario</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> --}}
             </div>
 
             <form id="formEditarUsuario" method="POST">
@@ -15,13 +15,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label>Nombre completo</label>
+                                <label>Nombre completo <span class="text-danger">*</span></label>
                                 <input type="text" id="edit_nombre" name="name" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label>Email</label>
+                                <label>Email <span class="text-danger">*</span></label>
                                 <input type="email" id="edit_email" name="email" class="form-control" required>
                             </div>
                         </div>
@@ -31,8 +31,16 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label>Nueva contraseña (opcional)</label>
-                                <input type="password" name="password" class="form-control"
-                                    placeholder="Dejar vacío para no cambiar">
+                                <div class="input-group">
+                                    <input type="password" name="password" id="edit_password" class="form-control"
+                                        placeholder="Dejar vacío para no cambiar">
+                                    <button type="button" class="btn btn-outline-secondary toggle-password-edit"
+                                        data-target="edit_password">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <small class="text-muted">Mínimo 8 caracteres, una mayúscula, un número y un
+                                    símbolo</small>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -71,6 +79,7 @@
                                             {{ $cliente->apellido ?? '' }}</option>
                                     @endforeach
                                 </select>
+                                <small class="text-muted d-block mt-1">Solo uno de los dos puede ser asignado</small>
                             </div>
                         </div>
                     </div>

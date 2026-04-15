@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'El Sepulturero Juan - Sistema de Gestión Funeraria')</title>
 
-    <!-- Font Awesome para iconos -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Google Fonts -->
@@ -28,71 +28,89 @@
     @vite(['resources/js/app.js'])
     @vite(['resources/css/app.css'])
 
+
 </head>
 
 <body>
-    <!-- Barra de navegación -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-cross"></i>
-                <span>El Sepulturero Juan</span>
-            </div>
-            <ul class="nav-links">
-                <!-- Dashboard - visible para todos los autenticados -->
-                @auth
-                    <li><a href="{{ route('sepulturero.dashboard') }}" class="@yield('active_dashboard', '')">
+            <!-- Logo con menú desplegable -->
+            <div class="logo-container">
+                <div class="logo-main">
+                    <i class="fas fa-cross"></i>
+                    <span>El Sepulturero Juan</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+
+                <!-- Menú desplegable que aparece al hacer hover -->
+                <div class="logo-dropdown-menu">
+                    <div class="dropdown-header">MÓDULOS DEL SISTEMA</div>
+
+                    <!-- Módulo Dashboard -->
+                    @auth
+                        <a href="{{ route('sepulturero.dashboard') }}">
                             <i class="fas fa-home"></i> Dashboard
-                        </a></li>
-                @endauth
+                        </a>
+                    @endauth
 
-                <!-- Contratos - solo si tiene permiso -->
-                @auth
-                    @if (auth()->user()->tienePermiso('ver_contratos'))
-                        <li><a href="{{ route('sepulturero.contratos') }}" class="@yield('active_contratos', '')">
-                                <i class="fas fa-file-contract"></i> Contratos
-                            </a></li>
-                    @endif
-                @endauth
-
-                <!-- Inhumaciones - solo si tiene permiso -->
-                @auth
-                    @if (auth()->user()->tienePermiso('ver_inhumaciones'))
-                        <li><a href="{{ route('sepulturero.inhumaciones') }}" class="@yield('active_inhumaciones', '')">
-                                <i class="fas fa-tombstone"></i> Inhumaciones
-                            </a></li>
-                    @endif
-                @endauth
-
-                <!-- Mantenimiento - solo si tiene permiso -->
-                @auth
-                    @if (auth()->user()->tienePermiso('ver_mantenimiento'))
-                        <li><a href="{{ route('sepulturero.mantenimiento') }}" class="@yield('active_mantenimiento', '')">
-                                <i class="fas fa-tools"></i> Mantenimiento
-                            </a></li>
-                    @endif
-                @endauth
-
-                <!-- Ventas - solo si tiene permiso -->
-                @auth
-                    @if (auth()->user()->tienePermiso('ver_ventas'))
-                        <li><a href="{{ route('sepulturero.ventas') }}" class="@yield('active_ventas', '')">
-                                <i class="fas fa-chart-line"></i> Ventas
-                            </a></li>
-                    @endif
-                @endauth
-
-                <!-- Usuarios (Gestión) - solo si tiene permiso -->
-                @auth
-                    @if (auth()->user()->tienePermiso('ver_usuarios'))
-                        <li><a href="{{ route('admin.usuarios.index') }}" class="@yield('active_usuarios', '')">
+                    <!-- Módulo Usuarios (solo si tiene permiso) -->
+                    @auth
+                        @if (auth()->user()->tienePermiso('ver_usuarios'))
+                            <a href="{{ route('admin.usuarios.index') }}">
                                 <i class="fas fa-users"></i> Usuarios
-                            </a></li>
-                    @endif
-                @endauth
-            </ul>
+                            </a>
+                        @endif
+                    @endauth
 
-            <!-- Menú de usuario -->
+                    <!-- Módulo Ventas (Clientes + Contratos) -->
+                    @auth
+                        @if (auth()->user()->tienePermiso('ver_clientes') || auth()->user()->tienePermiso('ver_contratos'))
+                            <div class="dropdown-header" style="margin-top: 0.5rem;">VENTAS</div>
+                            @if (auth()->user()->tienePermiso('ver_clientes'))
+                                <a href="{{ route('admin.clientes.index') }}">
+                                    <i class="fas fa-user"></i> Clientes
+                                </a>
+                            @endif
+                            @if (auth()->user()->tienePermiso('ver_contratos'))
+                                <a href="{{ route('admin.contratos.index') }}">
+                                    <i class="fas fa-file-contract"></i> Contratos
+                                </a>
+                            @endif
+                        @endif
+                    @endauth
+
+                    <!-- Módulo Inhumaciones -->
+                    @auth
+                        @if (auth()->user()->tienePermiso('ver_inhumaciones'))
+                            <div class="dropdown-header" style="margin-top: 0.5rem;">OPERACIONES</div>
+                            <a href="{{ route('admin.inhumaciones.index') }}">
+                                <i class="fas fa-dove"></i> Inhumaciones
+                            </a>
+                        @endif
+                    @endauth
+
+                    <!-- Módulo Pagos -->
+                    @auth
+                        @if (auth()->user()->tienePermiso('ver_pagos'))
+                            <a href="{{ route('admin.pagos.index') }}">
+                                <i class="fas fa-dollar-sign"></i> Pagos
+                            </a>
+                        @endif
+                    @endauth
+
+                    <!-- Separador y Reportes -->
+                    @auth
+                        @if (auth()->user()->tienePermiso('ver_reportes'))
+                            <div class="dropdown-header" style="margin-top: 0.5rem;">REPORTES</div>
+                            <a href="{{ route('admin.reportes.index') }}">
+                                <i class="fas fa-chart-bar"></i> Reportes
+                            </a>
+                        @endif
+                    @endauth
+                </div>
+            </div>
+
+            <!-- Menú de usuario / Autenticación -->
             @auth
                 <div id="userInfoBtn" class="user-info-clickable">
                     <div class="user-info">
@@ -115,7 +133,6 @@
         </div>
     </nav>
 
-    <!-- Contenido principal -->
     <main class="main-content">
         @if (session('success'))
             <div class="alert alert-success"
@@ -134,7 +151,6 @@
         @yield('content')
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <p>&copy; {{ date('Y') }} El Sepulturero Juan - Sistema de Gestión Funeraria. Todos los derechos
             reservados.</p>

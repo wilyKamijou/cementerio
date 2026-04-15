@@ -1,23 +1,14 @@
 /* resources/css/modals/usuario-crear.css */
 
-/* ========== MODAL CREAR USUARIO - ESTILO MODERNO CON DIFUMINADO ========== */
+/* ========== MODAL CREAR USUARIO - ESTILO MODERNO ========== */
 
-/* 🔥 FORZAR FONDO DIFUMINADO 🔥 */
-#modalCrearUsuario .modal-backdrop {
-    background-color: rgba(0, 0, 0, 0.6) !important;
-    backdrop-filter: blur(8px) !important;
-}
-
-#modalCrearUsuario .modal-backdrop.show {
-    opacity: 1 !important;
-}
-
+/* Fondo del modal con DIFUMINADO */
 #modalCrearUsuario {
-    background-color: rgba(0, 0, 0, 0.6) !important;
-    backdrop-filter: blur(8px) !important;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
 }
 
-/* Animación de entrada para el fondo */
+/* Animación de entrada del fondo */
 @keyframes modalFadeIn {
     from {
         opacity: 0;
@@ -26,25 +17,34 @@
 
     to {
         opacity: 1;
-        backdrop-filter: blur(8px);
+        backdrop-filter: blur(10px);
     }
 }
 
-#modalCrearUsuario {
-    animation: modalFadeIn 0.3s ease;
+#modalCrearUsuario.fade {
+    animation: modalFadeIn 0.25s ease-out;
 }
 
-/* Ancho del modal */
+/* Backdrop difuminado */
+#modalCrearUsuario .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+/* Contenido del modal */
 #modalCrearUsuario .modal-content {
-    max-width: 950px;
     border-radius: 24px;
     border: none;
+    overflow: hidden;
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    backdrop-filter: none;
 }
 
 /* Animación de deslizamiento para el contenido */
 @keyframes modalSlideIn {
     from {
-        transform: translateY(-60px) scale(0.95);
+        transform: translateY(-40px) scale(0.96);
         opacity: 0;
     }
 
@@ -55,14 +55,71 @@
 }
 
 #modalCrearUsuario .modal-content {
-    animation: modalSlideIn 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+    animation: modalSlideIn 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+/* Ancho del modal */
+#modalCrearUsuario .modal-dialog {
+    max-width: 950px;
+}
+
+/* Cabecera */
+#modalCrearUsuario .modal-header {
+    background: linear-gradient(135deg, #1a472a 0%, #2d6a4f 50%, #40916c 100%);
+    padding: 1.5rem;
+    border-bottom: none;
+    position: relative;
+    overflow: hidden;
+}
+
+#modalCrearUsuario .modal-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+#modalCrearUsuario .modal-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+#modalCrearUsuario .modal-title i {
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    border-radius: 50%;
+}
+
+/* Botón cerrar (X) */
+#modalCrearUsuario .btn-close {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    padding: 8px;
+    opacity: 0.8;
+    transition: all 0.2s;
+}
+
+#modalCrearUsuario .btn-close:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
 }
 
 /* Títulos dentro del modal */
 #modalCrearUsuario h6 {
     font-size: 0.9rem;
     font-weight: 700;
-    color: #1a3f32;
+    color: #1a472a;
     margin-top: 0;
     margin-bottom: 1.25rem;
     padding-bottom: 0.75rem;
@@ -81,7 +138,7 @@
     margin-bottom: 0.5rem;
     font-weight: 600;
     font-size: 0.8rem;
-    color: #1e293b;
+    color: #1a472a;
     letter-spacing: 0.3px;
 }
 
@@ -89,14 +146,15 @@
     color: #ef4444;
 }
 
+/* Inputs modernos */
 #modalCrearUsuario .form-control {
-    width: 100%;
-    padding: 10px 14px;
-    border: 1.5px solid #e2e8f0;
-    border-radius: 12px;
+    border-radius: 14px;
+    border: 2px solid #e2e8f0;
+    padding: 12px 16px;
     font-size: 0.9rem;
     transition: all 0.2s ease;
     background: #fafbfc;
+    width: 100%;
 }
 
 #modalCrearUsuario .form-control:hover {
@@ -105,9 +163,9 @@
 }
 
 #modalCrearUsuario .form-control:focus {
-    border-color: #2c5e4a;
+    border-color: #2d6a4f;
+    box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.15);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(44, 94, 74, 0.15);
     background: white;
 }
 
@@ -115,7 +173,7 @@
 #modalCrearUsuario select.form-control {
     cursor: pointer;
     appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232c5e4a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232d6a4f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 16px;
@@ -140,7 +198,7 @@
 #modalCrearUsuario .alert-info {
     background: linear-gradient(135deg, #e0f2fe 0%, #d1fae5 100%);
     color: #0f3b2c;
-    border-left: 4px solid #2c5e4a;
+    border-left: 4px solid #2d6a4f;
 }
 
 /* Grid de permisos */
@@ -180,7 +238,7 @@
     width: 18px;
     height: 18px;
     cursor: pointer;
-    accent-color: #2c5e4a;
+    accent-color: #2d6a4f;
     border-radius: 4px;
 }
 
@@ -192,7 +250,7 @@
 
 #modalCrearUsuario .permiso-nombre {
     font-weight: 700;
-    color: #1a3f32;
+    color: #1a472a;
     display: block;
     font-size: 0.85rem;
 }
@@ -209,8 +267,8 @@
     display: flex;
     justify-content: flex-end;
     gap: 12px;
-    margin-top: 1.75rem;
-    padding-top: 1.25rem;
+    margin-top: 0rem;
+    padding-top: 0rem;
     border-top: 1px solid #e2e8f0;
 }
 
@@ -223,7 +281,6 @@
     font-size: 0.85rem;
     font-weight: 600;
     transition: all 0.2s ease;
-    letter-spacing: 0.3px;
 }
 
 #modalCrearUsuario .btn-secondary {
@@ -239,24 +296,25 @@
 }
 
 #modalCrearUsuario .btn-success {
-    background: linear-gradient(135deg, #2c5e4a 0%, #1a3f32 100%);
+    background: linear-gradient(135deg, #1a472a 0%, #2d6a4f 100%);
+    border: none;
     color: white;
-    box-shadow: 0 2px 8px rgba(44, 94, 74, 0.25);
+    box-shadow: 0 2px 8px rgba(26, 71, 42, 0.25);
 }
 
 #modalCrearUsuario .btn-success:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(44, 94, 74, 0.35);
+    box-shadow: 0 6px 16px rgba(26, 71, 42, 0.35);
 }
 
 #modalCrearUsuario .btn-outline-success {
     background: transparent;
-    border: 1.5px solid #2c5e4a;
-    color: #2c5e4a;
+    border: 1.5px solid #2d6a4f;
+    color: #2d6a4f;
 }
 
 #modalCrearUsuario .btn-outline-success:hover {
-    background: #2c5e4a;
+    background: #2d6a4f;
     color: white;
     transform: translateY(-1px);
 }
@@ -289,12 +347,33 @@
 }
 
 #modalCrearUsuario .permisos-grid::-webkit-scrollbar-thumb {
-    background: #2c5e4a;
+    background: #2d6a4f;
     border-radius: 10px;
 }
 
 #modalCrearUsuario .permisos-grid::-webkit-scrollbar-thumb:hover {
-    background: #1a3f32;
+    background: #1a472a;
+}
+
+/* Estado de carga del botón */
+#modalCrearUsuario .btn-success:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#modalCrearUsuario .btn-success .fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Responsive */

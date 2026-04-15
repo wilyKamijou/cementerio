@@ -10,7 +10,7 @@ class RolPermisoSeeder extends Seeder
 {
     public function run()
     {
-        // ========== 1. CREAR PERMISOS (DIVIDIDOS POR ACCIÓN) ==========
+        // ========== 1. CREAR PERMISOS BASE (FIJOS - EL CLIENTE NO PUEDE MODIFICAR) ==========
         $permisos = [
             // ========== USUARIOS ==========
             ['nombre' => 'ver_usuarios', 'ruta' => '/admin/usuarios', 'descripcion' => 'Ver lista de usuarios'],
@@ -24,7 +24,8 @@ class RolPermisoSeeder extends Seeder
             ['nombre' => 'crear_rol', 'ruta' => '/admin/roles/create', 'descripcion' => 'Crear nuevos roles'],
             ['nombre' => 'editar_rol', 'ruta' => '/admin/roles/edit', 'descripcion' => 'Editar roles existentes'],
             ['nombre' => 'eliminar_rol', 'ruta' => '/admin/roles/delete', 'descripcion' => 'Eliminar roles'],
-            ['nombre' => 'asignar_permisos', 'ruta' => '/admin/roles/permisos', 'descripcion' => 'Asignar permisos a roles'],
+            ['nombre' => 'asignar-permisos', 'ruta' => '/roles/{id}/permisos', 'descripcion' => 'Asignar permisos a roles'],
+            ['nombre' => 'ver_roles_permisos', 'ruta' => '/admin/roles/permisos', 'descripcion' => 'Ver qué permisos tiene un rol'], // ← CAMBIADO
 
             // ========== CLIENTES ==========
             ['nombre' => 'ver_clientes', 'ruta' => '/admin/clientes', 'descripcion' => 'Ver lista de clientes'],
@@ -70,10 +71,6 @@ class RolPermisoSeeder extends Seeder
             ['nombre' => 'ver_reportes', 'ruta' => '/admin/reportes', 'descripcion' => 'Ver reportes'],
             ['nombre' => 'exportar_reportes', 'ruta' => '/admin/reportes/exportar', 'descripcion' => 'Exportar reportes en PDF'],
             ['nombre' => 'enviar_reportes', 'ruta' => '/admin/reportes/enviar', 'descripcion' => 'Enviar reportes por email'],
-
-            // ========== CLIENTE (público) ==========
-            ['nombre' => 'procesar_pago_online', 'ruta' => '/pagos/procesar', 'descripcion' => 'Procesar pagos en línea'],
-            ['nombre' => 'consultar_contrato', 'ruta' => '/contratos/estado', 'descripcion' => 'Consultar estado del contrato'],
         ];
 
         foreach ($permisos as $permiso) {
@@ -83,7 +80,7 @@ class RolPermisoSeeder extends Seeder
             );
         }
 
-        // ========== 2. CREAR ROLES BASE ==========
+        // ========== 2. CREAR ROLES BASE (EL CLIENTE PUEDE CREAR MÁS) ==========
         $admin = Rol::firstOrCreate(
             ['nombre' => 'Administrador'],
             ['descripcion' => 'Acceso total - Puede crear, editar, eliminar todo']
@@ -106,10 +103,10 @@ class RolPermisoSeeder extends Seeder
 
         // ========== 3. ASIGNAR PERMISOS A ROLES ==========
 
-        // Administrador: TODOS los permisos
+        // 👑 ADMINISTRADOR: TODOS los permisos
         $admin->permisos()->sync(Permiso::all()->pluck('idPer'));
 
-        // Cajero: permisos de clientes, contratos, pagos (solo crear y ver, no eliminar)
+        // 💰 CAJERO: permisos de clientes, contratos, pagos
         $cajero->permisos()->sync(Permiso::whereIn('nombre', [
             'ver_clientes',
             'crear_cliente',
@@ -121,7 +118,7 @@ class RolPermisoSeeder extends Seeder
             'ver_reportes'
         ])->pluck('idPer'));
 
-        // Operador: permisos de inhumaciones y mantenimiento (solo crear y ver)
+        // 🔧 OPERADOR: permisos de inhumaciones y mantenimiento
         $operador->permisos()->sync(Permiso::whereIn('nombre', [
             'ver_inhumaciones',
             'crear_inhumacion',
@@ -129,13 +126,26 @@ class RolPermisoSeeder extends Seeder
             'crear_mantenimiento'
         ])->pluck('idPer'));
 
-        // Cliente: permisos públicos
+        // 👤 CLIENTE: permisos públicos
         $cliente->permisos()->sync(Permiso::whereIn('nombre', [
             'procesar_pago_online',
             'consultar_contrato'
         ])->pluck('idPer'));
 
-        $this->command->info('✅ Permisos y roles creados exitosamente!');
-        $this->command->info('📌 Los permisos están divididos por acción (crear, ver, editar, eliminar)');
+        // ========== 4. CREAR USUARIO ADMINISTRADOR POR DEFECTO ==========
+        \App\Models\User::firstOrCreate(
+            ['email' => 'wilianxd474@gmail.com'],
+            [
+                'name' => 'wilian',
+                'password' => bcrypt('1234'),
+                'idRol' => $admin->idRol,
+            ]
+        );
+
+        $this->command->info('✅ Permisos y roles base creados exitosamente!');
+        $this->command->info('📌 Los permisos son FIJOS (no se pueden crear/editar/eliminar)');
+        $this->command->info('📌 El administrador puede CREAR, EDITAR y ELIMINAR roles');
+        $this->command->info('📌 ver_roles_permisos permite VER qué permisos tiene un rol (solo lectura)');
+        $this->command->info('🔑 Usuario administrador: admin@sepulturero.com / admin123');
     }
 }

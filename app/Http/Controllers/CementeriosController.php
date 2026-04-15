@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\cementerios;
+use App\Models\Cementerios;
 use Illuminate\Http\Request;
 
 class CementeriosController extends Controller

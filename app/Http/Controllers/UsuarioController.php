@@ -23,17 +23,26 @@ class UsuarioController extends Controller
         $empleados = Empleado::all();
         $clientes = Cliente::all();
         $permisos = Permiso::all();
+        $rolPermisos = RolPermiso::with(['rol', 'permiso'])->get();
 
-        return view('gestionarUsuario.admin-usuarios', compact('usuarios', 'roles', 'empleados', 'clientes', 'permisos'));
+        return view('gestionarUsuario.admin-usuarios', compact(
+            'usuarios',
+            'roles',
+            'empleados',
+            'clientes',
+            'permisos',
+            'rolPermisos'  // ← Agregar esta variable
+        ));
+        return view('gestionarUsuario.admin-usuarios', compact('rolPermisos', 'usuarios', 'roles', 'empleados', 'clientes', 'permisos'));
     }
 
     public function store(Request $request)
     {
         try {
             $request->validate([
-                'name' => 'required|string|max:255',
+                'name' => 'required|string|max:255|unique:users,name',
                 'email' => 'required|email|unique:users,email',
-                'password' => 'required|min:6|confirmed',
+                'password' => 'required|min:8|confirmed',
             ]);
 
             DB::beginTransaction();
@@ -71,7 +80,7 @@ class UsuarioController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => '✅ Usuario creado exitosamente'
+                'message' => 'Usuario creado exitosamente'
             ]);
         } catch (ValidationException $e) {
             DB::rollBack();
@@ -81,19 +90,19 @@ class UsuarioController extends Controller
             $mensajesClaros = [];
 
             if (isset($errors['email'])) {
-                $mensajesClaros[] = '📧 El correo electrónico ya está registrado. Por favor, usa otro.';
+                $mensajesClaros[] = 'El correo electrónico ya está registrado. Por favor, usa otro.';
             }
 
             if (isset($errors['name'])) {
-                $mensajesClaros[] = '👤 El nombre de usuario es requerido.';
+                $mensajesClaros[] = 'El nombre de usuario ya está registrado. Por favor, usa otro.';
             }
 
             if (isset($errors['password'])) {
-                $mensajesClaros[] = '🔒 La contraseña debe tener al menos 6 caracteres.';
+                $mensajesClaros[] = 'La contraseña debe tener al menos 8 caracteres.';
             }
 
             if (isset($errors['password_confirmation']) || (isset($errors['password']) && str_contains($errors['password'][0] ?? '', 'confirmed'))) {
-                $mensajesClaros[] = '🔑 Las contraseñas no coinciden. Verifica que sean iguales.';
+                $mensajesClaros[] = 'Las contraseñas no coinciden. Verifica que sean iguales.';
             }
 
             $errorMessage = implode(' | ', $mensajesClaros);
@@ -106,7 +115,7 @@ class UsuarioController extends Controller
             DB::rollBack();
             return response()->json([
                 'success' => false,
-                'message' => '❌ Error al crear usuario. Intenta de nuevo.'
+                'message' => 'Error al crear usuario. Intenta de nuevo.'
             ], 500);
         }
     }
@@ -116,10 +125,11 @@ class UsuarioController extends Controller
         try {
             $user = User::findOrFail($id);
 
+            // 👇 VALIDACIÓN CON UNIQUE (excluyendo el registro actual)
             $request->validate([
-                'name' => 'required|string|max:255',
+                'name' => 'required|string|max:255|unique:users,name,' . $id,
                 'email' => 'required|email|unique:users,email,' . $id,
-                'password' => 'nullable|min:6'
+                'password' => 'nullable|min:8'
             ]);
 
             $data = [
@@ -141,14 +151,32 @@ class UsuarioController extends Controller
                 'message' => 'Usuario actualizado exitosamente'
             ]);
         } catch (ValidationException $e) {
+            // 👇 MENSAJES PERSONALIZADOS
+            $errors = $e->errors();
+            $mensajesClaros = [];
+
+            if (isset($errors['name'])) {
+                $mensajesClaros[] = 'El nombre de usuario ya está registrado. Por favor, usa otro.';
+            }
+
+            if (isset($errors['email'])) {
+                $mensajesClaros[] = 'El correo electrónico ya está registrado. Por favor, usa otro.';
+            }
+
+            if (isset($errors['password'])) {
+                $mensajesClaros[] = 'La contraseña debe tener al menos 8 caracteres.';
+            }
+
+            $errorMessage = implode(' | ', $mensajesClaros);
+
             return response()->json([
                 'success' => false,
-                'message' => $e->errors()
+                'message' => $errorMessage
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error al actualizar usuario: ' . $e->getMessage()
+                'message' => 'Error al actualizar usuario. Intenta de nuevo.'
             ], 500);
         }
     }

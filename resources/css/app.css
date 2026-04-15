@@ -14,6 +14,7 @@
 @import 'gestionarUsuario/rol-editar-permisos.css';
 @import 'gestionarUsuario/permiso-crear.css';
 @import 'gestionarUsuario/empleado-crear.css';
+@import 'gestionarUsuario/empleado-editar.css';
 
 
 /* 2. DESPUÉS Tailwind */

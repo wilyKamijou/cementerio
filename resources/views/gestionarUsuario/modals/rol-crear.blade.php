@@ -4,7 +4,6 @@
         <div class="modal-content">
             <div class="modal-header bg-success text-white">
                 <h5 class="modal-title"><i class="fas fa-tag"></i> Crear Nuevo Rol</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <form id="formCrearRol" method="POST">
@@ -39,13 +38,12 @@
                         @endforeach
                     </div>
 
-                    <div class="mt-2">
-                        <button type="button" class="btn btn-sm btn-secondary" id="selectAllPermisosRol">
-                            <i class="fas fa-check-double"></i> Seleccionar todos
-                        </button>
-                    </div>
+
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" id="selectAllPermisosRol">
+                        <i class="fas fa-check-double"></i> Seleccionar todos
+                    </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success">Crear Rol</button>
                 </div>
@@ -53,9 +51,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $('#selectAllPermisosRol').click(function() {
-        $('.permiso-checkbox').prop('checked', true);
-    });
-</script>

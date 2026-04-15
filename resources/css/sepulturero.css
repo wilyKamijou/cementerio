@@ -425,3 +425,172 @@ td {
         font-size: 0.75rem;
     }
 }
+
+/* ========== NUEVO ESTILO - MENÚ DESPLEGABLE EN LOGO ========== */
+
+.navbar {
+    padding: 0.8rem 5%;
+}
+
+.logo-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.logo-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    border-radius: 12px;
+    transition: all 0.2s;
+    background: transparent;
+}
+
+.logo-main:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.logo-main i {
+    font-size: 1.8rem;
+    color: #2c5e4a;
+}
+
+.logo-main span {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.logo-main .fa-chevron-down {
+    font-size: 0.8rem;
+    color: #64748b;
+    transition: transform 0.2s;
+}
+
+.logo-container:hover .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+/* Menú desplegable del logo */
+.logo-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 250px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+    z-index: 1000;
+}
+
+.logo-container:hover .logo-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.logo-dropdown-menu .dropdown-header {
+    padding: 0.75rem 1rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.logo-dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.6rem 1rem;
+    color: #1e293b;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+}
+
+.logo-dropdown-menu a:hover {
+    background: #e8f5e9;
+    color: #2c5e4a;
+    padding-left: 1.5rem;
+}
+
+.logo-dropdown-menu a i {
+    width: 24px;
+    color: #2c5e4a;
+}
+
+/* Estilos para el usuario */
+.user-info-clickable {
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 40px;
+    transition: all 0.2s;
+}
+
+.user-info-clickable:hover {
+    background: rgba(44, 94, 74, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Sobrescribir el avatar existente para el nuevo estilo */
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #2c5e4a 0%, #1a3f32 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+/* Botones de autenticación */
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-login-navbar,
+.btn-register-navbar {
+    padding: 6px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-login-navbar {
+    background: transparent;
+    color: #2c5e4a;
+    border: 1px solid #2c5e4a;
+}
+
+.btn-login-navbar:hover {
+    background: #2c5e4a;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-register-navbar {
+    background: #2c5e4a;
+    color: white;
+}
+
+.btn-register-navbar:hover {
+    background: #1a3f32;
+    transform: translateY(-2px);
+}
