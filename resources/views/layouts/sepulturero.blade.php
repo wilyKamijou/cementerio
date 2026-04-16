@@ -87,6 +87,11 @@
                                 <i class="fas fa-dove"></i> Inhumaciones
                             </a>
                         @endif
+                        @if (auth()->user()->tienePermiso('ver_espacios'))
+                            <a href="{{ route('admin.espacios.index') }}">
+                                <i class="fas fa-dove"></i> Espacios
+                            </a>
+                        @endif
                     @endauth
 
                     <!-- Módulo Pagos -->

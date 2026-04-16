@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TipoInhumacion extends Model
 {
     use HasFactory;
-
+    protected $table = 'tipoInhumacion';
     protected $primaryKey = 'idTipo';
     public $incrementing = true;
     protected $keyType = 'int';

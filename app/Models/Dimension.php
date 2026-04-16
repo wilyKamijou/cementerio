@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dimension extends Model
 {
     use HasFactory;
-
+    protected $table = 'dimensiones';
     protected $primaryKey = 'idDim';
     protected $fillable = [
         'ancho',

@@ -2,64 +2,130 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Models\Cementerio;
+use App\Models\Dimension;
+use App\Models\Direccion;
 use App\Models\Inhumacion;
+use App\Models\Espacio;
+use App\Models\Mantenimiento;
+use App\Models\TipoInhumacion;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class InhumacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $espacios = Espacio::all();
+        $cementerios = Cementerio::all();
+        $dimensiones = Dimension::all();
+        $direcciones = Direccion::all();
+        $tipos = TipoInhumacion::all();
+        $mantenimientos = Mantenimiento::all();
+        $inhumaciones = Inhumacion::with(['espacio', 'tipo'])->get();
+        return view('inhumaciones.admin-inhumacion', compact('inhumaciones', 'espacios', 'dimensiones', 'direcciones', 'cementerios', 'mantenimientos', 'tipos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        try {
+            $request->validate([
+                'nombre' => 'required|string|max:255',
+                'paterno' => 'required|string|max:255',
+                'materno' => 'nullable|string|max:255',
+                'fechaNaci' => 'nullable|date',
+                'fechaDefun' => 'required|date',
+                'fechaInhuma' => 'required|date',
+                'causaMuer' => 'nullable|string',
+                'idEspacio' => 'required|exists:espacios,idEspacio',
+                'idTipo' => 'required|exists:tipoInhumacion,idTipo',
+            ]);
+
+            $inhumacion = Inhumacion::create($request->all());
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Inhumación registrada exitosamente',
+                'inhumacion' => $inhumacion
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error de validación'
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al registrar inhumación'
+            ], 500);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Inhumacion $inhumacion)
+    public function show($id)
     {
-        //
+        try {
+            $inhumacion = Inhumacion::with(['espacio', 'tipo'])->findOrFail($id);
+            return response()->json($inhumacion);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Inhumación no encontrada'
+            ], 404);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Inhumacion $inhumacion)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $inhumacion = Inhumacion::findOrFail($id);
+
+            $request->validate([
+                'nombre' => 'required|string|max:255',
+                'paterno' => 'required|string|max:255',
+                'materno' => 'nullable|string|max:255',
+                'fechaNaci' => 'nullable|date',
+                'fechaDefun' => 'required|date',
+                'fechaInhuma' => 'required|date',
+                'causaMuer' => 'nullable|string',
+                'idEspacio' => 'required|exists:espacios,idEspacio',
+                'idTipo' => 'required|exists:tipoInhumacion,idTipo',
+            ]);
+
+            $inhumacion->update($request->all());
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Inhumación actualizada exitosamente'
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error de validación'
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al actualizar inhumación'
+            ], 500);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Inhumacion $inhumacion)
+    public function destroy($id)
     {
-        //
-    }
+        try {
+            $inhumacion = Inhumacion::findOrFail($id);
+            $inhumacion->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Inhumacion $inhumacion)
-    {
-        //
+            return response()->json([
+                'success' => true,
+                'message' => 'Inhumación eliminada exitosamente'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al eliminar inhumación'
+            ], 500);
+        }
     }
 }

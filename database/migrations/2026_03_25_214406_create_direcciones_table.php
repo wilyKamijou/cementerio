@@ -10,14 +10,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('direcciones', function (Blueprint $table) {
-            $table->id('idDir'); 
+            $table->id('idDir');
             $table->string('seccion');
             $table->string('numero');
             $table->string('calle');
             $table->string('fila');
-            
+
             $table->timestamps();
-});
+        });
     }
 
     public function down(): void

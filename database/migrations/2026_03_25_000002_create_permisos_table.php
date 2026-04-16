@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('permisos', function (Blueprint $table) {
             $table->id('idPer'); // idPer
             $table->string('nombre');
-            $table->string('ruta');
+            $table->string('ruta')->nullable();
             $table->text('descripcion')->nullable();
             $table->timestamps();
         });

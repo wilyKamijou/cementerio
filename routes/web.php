@@ -18,6 +18,7 @@ use App\Http\Controllers\DireccionController;
 use App\Http\Controllers\CompromisoController;
 use App\Http\Controllers\SepultureroController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TipoInhumacionController;
 use Illuminate\Support\Facades\Route;
 
 // ========== RUTAS PÚBLICAS ==========
@@ -88,7 +89,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/espacios', [EspacioController::class, 'index'])->name('espacios.index');
         Route::get('/espacios/create', [EspacioController::class, 'create'])->name('espacios.create')->middleware('permiso:crear_espacio');
         Route::post('/espacios', [EspacioController::class, 'store'])->name('espacios.store')->middleware('permiso:crear_espacio');
-        Route::get('/espacios/{id}/edit', [EspacioController::class, 'edit'])->name('espacios.edit')->middleware('permiso:editar_espacio');
+        Route::get('/espacios/{id}', [EspacioController::class, 'show'])->name('espacios.show')->middleware('permiso:editar_espacio');
         Route::put('/espacios/{id}', [EspacioController::class, 'update'])->name('espacios.update')->middleware('permiso:editar_espacio');
         Route::delete('/espacios/{id}', [EspacioController::class, 'destroy'])->name('espacios.destroy')->middleware('permiso:eliminar_espacio');
     });
@@ -128,7 +129,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/inhumaciones', [InhumacionController::class, 'index'])->name('inhumaciones.index');
         Route::get('/inhumaciones/create', [InhumacionController::class, 'create'])->name('inhumaciones.create')->middleware('permiso:crear_inhumacion');
         Route::post('/inhumaciones', [InhumacionController::class, 'store'])->name('inhumaciones.store')->middleware('permiso:crear_inhumacion');
-        Route::get('/inhumaciones/{id}/edit', [InhumacionController::class, 'edit'])->name('inhumaciones.edit')->middleware('permiso:editar_inhumacion');
+        Route::get('/inhumaciones/{id}', [InhumacionController::class, 'show'])->name('inhumaciones.show')->middleware('permiso:editar_inhumacion');
         Route::put('/inhumaciones/{id}', [InhumacionController::class, 'update'])->name('inhumaciones.update')->middleware('permiso:editar_inhumacion');
         Route::delete('/inhumaciones/{id}', [InhumacionController::class, 'destroy'])->name('inhumaciones.destroy')->middleware('permiso:eliminar_inhumacion');
     });
@@ -138,6 +139,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/mantenimientos', [MantenimientoController::class, 'index'])->name('mantenimientos.index');
         Route::get('/mantenimientos/create', [MantenimientoController::class, 'create'])->name('mantenimientos.create')->middleware('permiso:crear_mantenimiento');
         Route::post('/mantenimientos', [MantenimientoController::class, 'store'])->name('mantenimientos.store')->middleware('permiso:crear_mantenimiento');
+        Route::get('/mantenimientos/{id}', [MantenimientoController::class, 'show'])->name('mantenimientos.show')->middleware('permiso:editar_mantenimiento');
+        Route::put('/mantenimientos/{id}', [MantenimientoController::class, 'update'])->name('mantenimientos.update')->middleware('permiso:editar_mantenimiento');
+        Route::delete('/mantenimiento/{id}', [MantenimientoController::class, 'destroy'])->name('mantenimientos.destroy')->middleware('permiso:eliminar_mantenimiento');
     });
 
     // ========== MÓDULO REPORTES (ADMINISTRADOR Y CAJERO) ==========
@@ -159,7 +163,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/cementerios', [CementeriosController::class, 'index'])->name('cementerios.index');
         Route::get('/cementerios/create', [CementeriosController::class, 'create'])->name('cementerios.create')->middleware('permiso:crear_cementerio');
         Route::post('/cementerios', [CementeriosController::class, 'store'])->name('cementerios.store')->middleware('permiso:crear_cementerio');
-        Route::get('/cementerios/{id}/edit', [CementeriosController::class, 'edit'])->name('cementerios.edit')->middleware('permiso:editar_cementerio');
+        Route::get('/cementerios/{id}', [CementeriosController::class, 'show'])->name('cementerios.show')->middleware('permiso:editar_cementerio');
         Route::put('/cementerios/{id}', [CementeriosController::class, 'update'])->name('cementerios.update')->middleware('permiso:editar_cementerio');
         Route::delete('/cementerios/{id}', [CementeriosController::class, 'destroy'])->name('cementerios.destroy')->middleware('permiso:eliminar_cementerio');
     });
@@ -169,7 +173,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dimensiones', [DimensionController::class, 'index'])->name('dimensiones.index');
         Route::get('/dimensiones/create', [DimensionController::class, 'create'])->name('dimensiones.create')->middleware('permiso:crear_dimension');
         Route::post('/dimensiones', [DimensionController::class, 'store'])->name('dimensiones.store')->middleware('permiso:crear_dimension');
-        Route::get('/dimensiones/{id}/edit', [DimensionController::class, 'edit'])->name('dimensiones.edit')->middleware('permiso:editar_dimension');
+        Route::get('/dimensiones/{id}', [DimensionController::class, 'show'])->name('dimensiones.show')->middleware('permiso:editar_dimension');
         Route::put('/dimensiones/{id}', [DimensionController::class, 'update'])->name('dimensiones.update')->middleware('permiso:editar_dimension');
         Route::delete('/dimensiones/{id}', [DimensionController::class, 'destroy'])->name('dimensiones.destroy')->middleware('permiso:eliminar_dimension');
     });
@@ -179,9 +183,19 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/direcciones', [DireccionController::class, 'index'])->name('direcciones.index');
         Route::get('/direcciones/create', [DireccionController::class, 'create'])->name('direcciones.create')->middleware('permiso:crear_direccion');
         Route::post('/direcciones', [DireccionController::class, 'store'])->name('direcciones.store')->middleware('permiso:crear_direccion');
-        Route::get('/direcciones/{id}/edit', [DireccionController::class, 'edit'])->name('direcciones.edit')->middleware('permiso:editar_direccion');
+        Route::get('/direcciones/{id}', [DireccionController::class, 'show'])->name('direcciones.show')->middleware('permiso:editar_direccion');
         Route::put('/direcciones/{id}', [DireccionController::class, 'update'])->name('direcciones.update')->middleware('permiso:editar_direccion');
         Route::delete('/direcciones/{id}', [DireccionController::class, 'destroy'])->name('direcciones.destroy')->middleware('permiso:eliminar_direccion');
+    });
+
+    // ========== MÓDULO DIRECCIONES (SOLO ADMINISTRADOR) ==========
+    Route::prefix('admin')->name('admin.')->middleware(['permiso:ver_tipo_inhumaciones'])->group(function () {
+        Route::get('/tipo_inhumaciones', [TipoInhumacionController::class, 'index'])->name('tipo_inhumaciones.index');
+        Route::get('/tipo_inhumaciones/create', [TipoInhumacionController::class, 'create'])->name('tipo_inhumaciones.create')->middleware('permiso:crear_tipo_inhumacion');
+        Route::post('/tipo_inhumaciones', [TipoInhumacionController::class, 'store'])->name('tipo_inhumaciones.store')->middleware('permiso:crear_tipo_inhumacion');
+        Route::get('/tipo_inhumaciones/{id}', [TipoInhumacionController::class, 'show'])->name('tipo_inhumaciones.show')->middleware('permiso:editar_tipo_inhumacion');
+        Route::put('/tipo_inhumaciones/{id}', [TipoInhumacionController::class, 'update'])->name('tipo_inhumaciones.update')->middleware('permiso:editar_tipo_inhumacion');
+        Route::delete('/tipo_inhumaciones/{id}', [TipoInhumacionController::class, 'destroy'])->name('tipo_inhumaciones.destroy')->middleware('permiso:eliminar_tipo_inhumacion');
     });
 });
 require __DIR__ . '/auth.php';

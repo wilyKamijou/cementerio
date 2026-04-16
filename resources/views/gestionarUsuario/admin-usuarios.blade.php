@@ -32,7 +32,12 @@
                                     <i class="fas fa-tag"></i> Nuevo Rol
                                 </button>
                             @endif
-
+                            {{-- Botón Nuevo Rol (solo si tiene permiso)
+                            @if (auth()->user()->tienePermiso('crear_rol'))
+                                <button type="button" class="btn btn-light" id="btnCrearRol">
+                                    <i class="fas fa-tag"></i> Nuevo permiso
+                                </button>
+                            @endif --}}
 
                         </div>
                     </div>
@@ -276,7 +281,7 @@
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Nombre</th>
-                                                    {{-- <th>Ruta</th> --}}
+                                                    <th>Ruta</th>
                                                     <th>Descripción</th>
                                                     <th>Acciones</th>
                                                 </tr>
@@ -286,7 +291,7 @@
                                                     <tr class="fila-permiso">
                                                         <td>{{ $permiso->idPer }}</td>
                                                         <td>{{ $permiso->nombre }}</td>
-                                                        {{-- <td>{{ $permiso->ruta ?? 'N/A' }}</td> --}}
+                                                        <td>{{ $permiso->ruta ?? 'N/A' }}</td>
                                                         <td>{{ $permiso->descripcion ?? 'N/A' }}</td>
                                                         {{-- <td>
                                                             @if (auth()->user()->tienePermiso('editar_permiso'))
@@ -392,5 +397,7 @@
     @if (auth()->user()->tienePermiso('editar_empleado'))
         @include('gestionarUsuario.modals.empleado-editar')
     @endif
-
+    {{-- @if (auth()->user()->tienePermiso('crear_rol'))
+        @include('gestionarUsuario.modals.permiso-crear')
+    @endif --}}
 @endsection

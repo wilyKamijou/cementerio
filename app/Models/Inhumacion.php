@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Inhumacion extends Model
 {
     use HasFactory;
+    protected $table = 'inhumaciones';
     protected $primaryKey = 'idInhum';
     protected $fillable = [
         'nombre',
@@ -22,7 +23,7 @@ class Inhumacion extends Model
     ];
 
     // Relaciones
-    public function tipoInhumacion()
+    public function tipo()
     {
         return $this->belongsTo(TipoInhumacion::class, 'idTipo', 'idTipo');
     }

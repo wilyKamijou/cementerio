@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Cementerio extends Model
 {
     use HasFactory;
-
+    protected $table = 'cementerios';
     protected $primaryKey = 'idCem';
     protected $fillable = [
         'nombre',
         'estado',
         'localizacion',
         'espacioDisp',
-   
+
     ];
 
     // Relaciones
