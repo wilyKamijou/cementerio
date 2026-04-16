@@ -1,0 +1,339 @@
+/* ========== MODAL CREAR DIRECCIÓN - ESTILO MODERNO ========== */
+
+/* Fondo del modal con DIFUMINADO */
+#modalCrearDireccion {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+/* Animación de entrada del fondo */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+
+    to {
+        opacity: 1;
+        backdrop-filter: blur(10px);
+    }
+}
+
+#modalCrearDireccion.fade {
+    animation: modalFadeIn 0.25s ease-out;
+}
+
+/* Backdrop difuminado */
+#modalCrearDireccion .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+/* Contenido del modal */
+#modalCrearDireccion .modal-content {
+    border-radius: 24px;
+    border: none;
+    overflow: hidden;
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    backdrop-filter: none;
+}
+
+/* Animación de deslizamiento para el contenido */
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-40px) scale(0.96);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+#modalCrearDireccion .modal-content {
+    animation: modalSlideIn 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+/* Ancho del modal */
+#modalCrearDireccion .modal-dialog {
+    max-width: 700px;
+}
+
+/* Cabecera */
+#modalCrearDireccion .modal-header {
+    background: linear-gradient(135deg, #1a472a 0%, #2d6a4f 50%, #40916c 100%);
+    padding: 1.5rem;
+    border-bottom: none;
+    position: relative;
+    overflow: hidden;
+}
+
+#modalCrearDireccion .modal-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+#modalCrearDireccion .modal-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+#modalCrearDireccion .modal-title i {
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    border-radius: 50%;
+}
+
+/* Botón cerrar (X) */
+#modalCrearDireccion .btn-close {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    padding: 8px;
+    opacity: 0.8;
+    transition: all 0.2s;
+}
+
+#modalCrearDireccion .btn-close:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+/* Body del modal */
+#modalCrearDireccion .modal-body {
+    padding: 1.75rem;
+}
+
+/* Grupos de formulario */
+#modalCrearDireccion .mb-3 {
+    margin-bottom: 1.25rem;
+}
+
+#modalCrearDireccion label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #1a472a;
+    letter-spacing: 0.3px;
+}
+
+#modalCrearDireccion label .text-danger {
+    color: #ef4444;
+}
+
+/* Inputs modernos */
+#modalCrearDireccion .form-control {
+    border-radius: 14px;
+    border: 2px solid #e2e8f0;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    background: #fafbfc;
+    width: 100%;
+}
+
+#modalCrearDireccion .form-control:hover {
+    border-color: #cbd5e1;
+    background: white;
+}
+
+#modalCrearDireccion .form-control:focus {
+    border-color: #2d6a4f;
+    box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.15);
+    outline: none;
+    background: white;
+}
+
+/* Footer del modal */
+#modalCrearDireccion .modal-footer {
+    padding: 1rem 1.75rem 1.75rem 1.75rem;
+    border-top: 1px solid #e2e8f0;
+    background: transparent;
+    gap: 12px;
+}
+
+/* Botones */
+#modalCrearDireccion .btn {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+#modalCrearDireccion .btn-secondary {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+#modalCrearDireccion .btn-secondary:hover {
+    background: #e2e8f0;
+    transform: translateY(-1px);
+    color: #1e293b;
+}
+
+#modalCrearDireccion .btn-success {
+    background: linear-gradient(135deg, #1a472a 0%, #2d6a4f 100%);
+    border: none;
+    color: white;
+    box-shadow: 0 2px 8px rgba(26, 71, 42, 0.25);
+}
+
+#modalCrearDireccion .btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(26, 71, 42, 0.35);
+}
+
+#modalCrearDireccion .btn i {
+    margin-right: 6px;
+}
+
+/* Estado de carga del botón */
+#modalCrearDireccion .btn-success:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#modalCrearDireccion .btn-success .fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Layout de 2 columnas */
+#modalCrearDireccion .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -0.5rem;
+}
+
+#modalCrearDireccion .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 0.5rem;
+}
+
+/* Mejoras visuales para inputs específicos */
+#modalCrearDireccion input[name="seccion"] {
+    text-transform: uppercase;
+}
+
+#modalCrearDireccion input[name="numero"] {
+    letter-spacing: 0.5px;
+}
+
+#modalCrearDireccion input[name="calle"] {
+    text-transform: capitalize;
+}
+
+#modalCrearDireccion input[name="fila"] {
+    text-transform: uppercase;
+}
+
+/* Placeholder styling */
+#modalCrearDireccion .form-control::placeholder {
+    color: #cbd5e1;
+    font-size: 0.85rem;
+}
+
+/* Responsive - En móviles las columnas se apilan */
+@media (max-width: 768px) {
+    #modalCrearDireccion .modal-dialog {
+        max-width: 95%;
+        margin: 1rem auto;
+    }
+
+    #modalCrearDireccion .modal-body {
+        padding: 1.25rem;
+    }
+
+    #modalCrearDireccion .modal-footer {
+        flex-direction: column;
+        padding: 1rem 1.25rem 1.25rem 1.25rem;
+    }
+
+    #modalCrearDireccion .modal-footer .btn {
+        width: 100%;
+    }
+
+    #modalCrearDireccion .modal-header {
+        padding: 1rem;
+    }
+
+    #modalCrearDireccion .modal-title {
+        font-size: 1.1rem;
+    }
+
+    #modalCrearDireccion .modal-title i {
+        font-size: 1.2rem;
+        padding: 6px;
+    }
+
+    /* En móviles, las columnas se apilan automáticamente */
+    #modalCrearDireccion .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+/* Tooltip o texto de ayuda opcional */
+#modalCrearDireccion .form-text {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    margin-top: 0.35rem;
+    display: block;
+}
+
+/* Ejemplo de dirección preview (opcional) */
+#modalCrearDireccion .direccion-preview {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-radius: 16px;
+    padding: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+    border: 1px solid #bbf7d0;
+}
+
+#modalCrearDireccion .direccion-preview i {
+    color: #2d6a4f;
+    margin-right: 8px;
+}
+
+#modalCrearDireccion .direccion-preview span {
+    font-size: 0.85rem;
+    color: #1a472a;
+    font-weight: 500;
+}
+
+#modalCrearDireccion .direccion-preview .preview-text {
+    font-weight: 700;
+    color: #2d6a4f;
+    font-size: 0.9rem;
+}

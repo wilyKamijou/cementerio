@@ -1,0 +1,72 @@
+{{-- resources/views/admin/modals/direccion-crear.blade.php --}}
+<div class="modal fade" id="modalCrearDireccion" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-map-marker-alt"></i> Nueva Dirección
+                </h5>
+
+            </div>
+
+            <form id="formCrearDireccion" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label>Sección <span class="text-danger">*</span></label>
+                                <input type="text" name="seccion" class="form-control" placeholder="Ej: A, B, C"
+                                    required>
+                                <small class="form-text">Letra o número de sección</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label>Número <span class="text-danger">*</span></label>
+                                <input type="text" name="numero" class="form-control" placeholder="Ej: 001, 002"
+                                    required>
+                                <small class="form-text">Número del espacio</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label>Calle <span class="text-danger">*</span></label>
+                                <input type="text" name="calle" class="form-control"
+                                    placeholder="Ej: Los Pinos, Principal" required>
+                                <small class="form-text">Nombre de la calle o avenida</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label>Fila <span class="text-danger">*</span></label>
+                                <input type="text" name="fila" class="form-control" placeholder="Ej: 1, 2, 3"
+                                    required>
+                                <small class="form-text">Número de fila</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vista previa de la dirección completa (opcional) -->
+                    <div class="direccion-preview" id="previewDireccion" style="display: none;">
+                        <i class="fas fa-location-dot"></i>
+                        <span>Dirección completa:</span>
+                        <div class="preview-text" id="previewTexto"></div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i> Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

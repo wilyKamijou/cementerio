@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Espacio;
 use App\Models\Cementerio;
 use App\Models\Dimension;
 use App\Models\Direccion;
-use App\Models\Inhumacion;
-use App\Models\Espacio;
-use App\Models\Mantenimiento;
-use App\Models\TipoInhumacion;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -17,37 +14,31 @@ class EspacioController extends Controller
 {
     public function index()
     {
-        $espacios = Espacio::all();
+        $espacios = Espacio::with(['direccion', 'dimension', 'cementerio'])->get();
         $cementerios = Cementerio::all();
         $dimensiones = Dimension::all();
         $direcciones = Direccion::all();
-        $tipos = TipoInhumacion::all();
-        $mantenimientos = Mantenimiento::all();
-        $inhumaciones = Inhumacion::with(['espacio', 'tipo'])->get();
-        return view('espacios.admin-espacio', compact('inhumaciones', 'espacios', 'dimensiones', 'direcciones', 'cementerios', 'mantenimientos', 'tipos'));
+
+        return view('espacios.admin-espacio', compact('espacios', 'cementerios', 'dimensiones', 'direcciones'));
     }
 
     public function store(Request $request)
     {
         try {
             $request->validate([
-                'nombre' => 'required|string|max:255',
-                'paterno' => 'required|string|max:255',
-                'materno' => 'nullable|string|max:255',
-                'fechaNaci' => 'nullable|date',
-                'fechaDefun' => 'required|date',
-                'fechaInhuma' => 'required|date',
-                'causaMuer' => 'nullable|string',
-                'idEspacio' => 'required|exists:espacios,idEspacio',
-                'idTipo' => 'required|exists:tipoInhumacion,idTipo',
+                'precio' => 'required|numeric|min:0',
+                'estado' => 'required|string|max:50',
+                'idDir' => 'required|exists:direcciones,idDir',
+                'idDim' => 'required|exists:dimensiones,idDim',
+                'idCem' => 'required|exists:cementerios,idCem',
             ]);
 
-            $inhumacion = Inhumacion::create($request->all());
+            $espacio = Espacio::create($request->all());
 
             return response()->json([
                 'success' => true,
-                'message' => 'Inhumación registrada exitosamente',
-                'inhumacion' => $inhumacion
+                'message' => 'Espacio creado exitosamente',
+                'espacio' => $espacio
             ]);
         } catch (ValidationException $e) {
             return response()->json([
@@ -57,7 +48,7 @@ class EspacioController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error al registrar inhumación'
+                'message' => 'Error al crear espacio'
             ], 500);
         }
     }
@@ -65,12 +56,12 @@ class EspacioController extends Controller
     public function show($id)
     {
         try {
-            $inhumacion = Inhumacion::with(['espacio', 'tipo'])->findOrFail($id);
-            return response()->json($inhumacion);
+            $espacio = Espacio::with(['direccion', 'dimension', 'cementerio'])->findOrFail($id);
+            return response()->json($espacio);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Inhumación no encontrada'
+                'message' => 'Espacio no encontrado'
             ], 404);
         }
     }
@@ -78,25 +69,21 @@ class EspacioController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $inhumacion = Inhumacion::findOrFail($id);
+            $espacio = Espacio::findOrFail($id);
 
             $request->validate([
-                'nombre' => 'required|string|max:255',
-                'paterno' => 'required|string|max:255',
-                'materno' => 'nullable|string|max:255',
-                'fechaNaci' => 'nullable|date',
-                'fechaDefun' => 'required|date',
-                'fechaInhuma' => 'required|date',
-                'causaMuer' => 'nullable|string',
-                'idEspacio' => 'required|exists:espacios,idEspacio',
-                'idTipo' => 'required|exists:tipoInhumacion,idTipo',
+                'precio' => 'required|numeric|min:0',
+                'estado' => 'required|string|max:50',
+                'idDir' => 'required|exists:direcciones,idDir',
+                'idDim' => 'required|exists:dimensiones,idDim',
+                'idCem' => 'required|exists:cementerios,idCem',
             ]);
 
-            $inhumacion->update($request->all());
+            $espacio->update($request->all());
 
             return response()->json([
                 'success' => true,
-                'message' => 'Inhumación actualizada exitosamente'
+                'message' => 'Espacio actualizado exitosamente'
             ]);
         } catch (ValidationException $e) {
             return response()->json([
@@ -106,7 +93,7 @@ class EspacioController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error al actualizar inhumación'
+                'message' => 'Error al actualizar espacio'
             ], 500);
         }
     }
@@ -114,17 +101,17 @@ class EspacioController extends Controller
     public function destroy($id)
     {
         try {
-            $inhumacion = Inhumacion::findOrFail($id);
-            $inhumacion->delete();
+            $espacio = Espacio::findOrFail($id);
+            $espacio->delete();
 
             return response()->json([
                 'success' => true,
-                'message' => 'Inhumación eliminada exitosamente'
+                'message' => 'Espacio eliminado exitosamente'
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error al eliminar inhumación'
+                'message' => 'Error al eliminar espacio'
             ], 500);
         }
     }

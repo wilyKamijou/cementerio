@@ -32,7 +32,11 @@
 #buscarEmpleado,
 #buscarRol,
 #buscarPermiso,
-#buscarRolPermiso {
+#buscarRolPermiso,
+#buscarEspacio,
+#buscarCementerio,
+#buscarDimension,
+#buscarDireccion {
     width: 100%;
     max-width: 350px;
     padding: 10px 16px;

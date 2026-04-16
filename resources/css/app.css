@@ -15,7 +15,15 @@
 @import 'gestionarUsuario/permiso-crear.css';
 @import 'gestionarUsuario/empleado-crear.css';
 @import 'gestionarUsuario/empleado-editar.css';
-
+/* modals de espacio */
+@import 'espacios/cementerio-crear.css';
+@import 'espacios/dimension-crear.css';
+@import 'espacios/direccion-crear.css';
+@import 'espacios/espacio-crear.css';
+@import 'espacios/cementerio-editar.css';
+@import 'espacios/dimension-editar.css';
+@import 'espacios/direccion-editar.css';
+@import 'espacios/espacio-editar.css';
 
 /* 2. DESPUÉS Tailwind */
 @tailwind base;

@@ -10,7 +10,16 @@ import './gestionarUsuario/usuario-crear.js';
 import './gestionarUsuario/usuario-editar.js';
 import './gestionarUsuario/empleado-crear.js'
 import './gestionarUsuario/empleado-editar.js'
-
+//gestion espacios
+import './espacios/admin-espacio.js'
+import './espacios/cementerio-crear.js'
+import './espacios/dimension-crear.js'
+import './espacios/direccion-crear.js'
+import './espacios/espacio-crear.js'
+import './espacios/cementerio-editar.js'
+import './espacios/dimension-editar.js'
+import './espacios/direccion-editar.js'
+import './espacios/espacio-editar.js'
 
 import Alpine from 'alpinejs';
 
