@@ -87,7 +87,10 @@
                                 <i class="fas fa-dove"></i> Inhumaciones
                             </a>
                         @endif
-                        @if (auth()->user()->tienePermiso('ver_espacios'))
+                        @if (auth()->user()->tienePermiso('ver_espacios') ||
+                                auth()->user()->tienePermiso('ver_cementerios') ||
+                                auth()->user()->tienePermiso('ver_dimensiones') ||
+                                auth()->user()->tienePermiso('ver_direcciones'))
                             <a href="{{ route('admin.espacios.index') }}">
                                 <i class="fas fa-dove"></i> Espacios
                             </a>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\VerificarPermiso;
+use App\Http\Middleware\PermisoAny;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -15,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // 👇 REGISTRAR EL MIDDLEWARE CON ALIAS
         $middleware->alias([
             'permiso' => VerificarPermiso::class,
+            'permiso.any' => PermisoAny::class,
             'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
             // puedes agregar más middlewares aquí
         ]);

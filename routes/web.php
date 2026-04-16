@@ -85,7 +85,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // ========== MÓDULO ESPACIOS (SOLO ADMINISTRADOR) ==========
-    Route::prefix('admin')->name('admin.')->middleware(['permiso:ver_espacios'])->group(function () {
+    Route::prefix('admin')->name('admin.')->middleware(['permiso.any:ver_espacios,ver_cementerios,ver_dimensiones,ver_direcciones'])->group(function () {
         Route::get('/espacios', [EspacioController::class, 'index'])->name('espacios.index');
         Route::get('/espacios/create', [EspacioController::class, 'create'])->name('espacios.create')->middleware('permiso:crear_espacio');
         Route::post('/espacios', [EspacioController::class, 'store'])->name('espacios.store')->middleware('permiso:crear_espacio');
