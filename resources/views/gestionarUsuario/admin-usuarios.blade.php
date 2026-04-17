@@ -13,21 +13,21 @@
                         <h3 class="mb-0"><i class="fas fa-cog"></i> Módulo de Usuarios</h3>
                         <div>
                             {{-- Botón Nuevo Usuario (solo si tiene permiso) --}}
-                            @if (auth()->user()->tienePermiso('crear_usuario'))
+                            @if (auth()->user()->tienePermiso('ver_usuarios'))
                                 <button type="button" class="btn btn-light" id="btnCrearUsuario">
                                     <i class="fas fa-plus"></i> Nuevo Usuario
                                 </button>
                             @endif
 
                             {{-- Botón Nuevo Empleado (solo si tiene permiso) --}}
-                            @if (auth()->user()->tienePermiso('crear_empleado'))
+                            @if (auth()->user()->tienePermiso('ver_empleados'))
                                 <button type="button" class="btn btn-light" id="btnCrearEmpleado">
                                     <i class="fas fa-user-tie"></i> Nuevo Empleado
                                 </button>
                             @endif
 
                             {{-- Botón Nuevo Rol (solo si tiene permiso) --}}
-                            @if (auth()->user()->tienePermiso('crear_rol'))
+                            @if (auth()->user()->tienePermiso('ver_roles'))
                                 <button type="button" class="btn btn-light" id="btnCrearRol">
                                     <i class="fas fa-tag"></i> Nuevo Rol
                                 </button>
@@ -134,18 +134,18 @@
                                                         </td>
                                                         <td>
                                                             {{-- Botones de acción según permisos --}}
-                                                            @if (auth()->user()->tienePermiso('editar_usuario'))
-                                                                <button class="btn-accion btn-edit editar-usuario"
-                                                                    data-id="{{ $usuario->id }}" title="Editar">
-                                                                    <i class="fas fa-edit"></i>
-                                                                </button>
-                                                            @endif
-                                                            @if (auth()->user()->tienePermiso('eliminar_usuario'))
-                                                                <button class="btn-accion btn-delete eliminar-usuario"
-                                                                    data-id="{{ $usuario->id }}" title="Eliminar">
-                                                                    <i class="fas fa-trash"></i>
-                                                                </button>
-                                                            @endif
+                                                            {{-- @if (auth()->user()->tienePermiso('editar_usuario')) --}}
+                                                            <button class="btn-accion btn-edit editar-usuario"
+                                                                data-id="{{ $usuario->id }}" title="Editar">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            {{-- @endif --}}
+                                                            {{-- @if (auth()->user()->tienePermiso('eliminar_usuario')) --}}
+                                                            <button class="btn-accion btn-delete eliminar-usuario"
+                                                                data-id="{{ $usuario->id }}" title="Eliminar">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                            {{-- @endif --}}
                                                         </td>
                                                     </tr>
                                                 @empty
@@ -187,18 +187,18 @@
                                                         <td>{{ $empleado->telefono }}</td>
                                                         <td>{{ $empleado->direccion ?? 'N/A' }}</td>
                                                         <td>
-                                                            @if (auth()->user()->tienePermiso('editar_empleado'))
-                                                                <button class="btn-accion btn-edit editar-empleado"
-                                                                    data-id="{{ $empleado->idEmpleado }}" title="Editar">
-                                                                    <i class="fas fa-edit"></i>
-                                                                </button>
-                                                            @endif
-                                                            @if (auth()->user()->tienePermiso('eliminar_empleado'))
-                                                                <button class="btn-accion btn-delete eliminar-empleado"
-                                                                    data-id="{{ $empleado->idEmpleado }}" title="Eliminar">
-                                                                    <i class="fas fa-trash"></i>
-                                                                </button>
-                                                            @endif
+                                                            {{-- @if (auth()->user()->tienePermiso('editar_empleado')) --}}
+                                                            <button class="btn-accion btn-edit editar-empleado"
+                                                                data-id="{{ $empleado->idEmpleado }}" title="Editar">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            {{-- @endif --}}
+                                                            {{-- @if (auth()->user()->tienePermiso('eliminar_empleado')) --}}
+                                                            <button class="btn-accion btn-delete eliminar-empleado"
+                                                                data-id="{{ $empleado->idEmpleado }}" title="Eliminar">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                            {{-- @endif --}}
                                                         </td>
                                                     </tr>
                                                 @empty
@@ -241,19 +241,18 @@
                                                                 class="badge-rol badge-info">{{ $rol->permisos->count() }}
                                                                 permisos</span></td>
                                                         <td>
-                                                            @if (auth()->user()->tienePermiso('editar_rol'))
-                                                                <button class="btn-accion btn-edit editar-permisos-rol"
-                                                                    data-id="{{ $rol->idRol }}"
-                                                                    title="Editar Permisos">
-                                                                    <i class="fas fa-key"></i>
-                                                                </button>
-                                                            @endif
-                                                            @if (auth()->user()->tienePermiso('eliminar_rol'))
-                                                                <button class="btn-accion btn-delete eliminar-rol"
-                                                                    data-id="{{ $rol->idRol }}" title="Eliminar">
-                                                                    <i class="fas fa-trash"></i>
-                                                                </button>
-                                                            @endif
+                                                            {{-- @if (auth()->user()->tienePermiso('editar_rol')) --}}
+                                                            <button class="btn-accion btn-edit editar-permisos-rol"
+                                                                data-id="{{ $rol->idRol }}" title="Editar Permisos">
+                                                                <i class="fas fa-key"></i>
+                                                            </button>
+                                                            {{-- @endif --}}
+                                                            {{-- @if (auth()->user()->tienePermiso('eliminar_rol')) --}}
+                                                            <button class="btn-accion btn-delete eliminar-rol"
+                                                                data-id="{{ $rol->idRol }}" title="Eliminar">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                            {{-- @endif --}}
                                                         </td>
                                                     </tr>
                                                 @empty
@@ -376,25 +375,22 @@
     </div>
 
     <!-- MODALS -->
-    @if (auth()->user()->tienePermiso('crear_usuario'))
+    @if (auth()->user()->tienePermiso('ver_usuarios'))
         @include('gestionarUsuario.modals.usuario-crear')
-    @endif
-    @if (auth()->user()->tienePermiso('editar_usuario'))
         @include('gestionarUsuario.modals.usuario-editar')
     @endif
-    @if (auth()->user()->tienePermiso('crear_rol'))
+
+    @if (auth()->user()->tienePermiso('ver_roles'))
         @include('gestionarUsuario.modals.rol-crear')
-    @endif
-    @if (auth()->user()->tienePermiso('editar_rol'))
         @include('gestionarUsuario.modals.rol-editar-permisos')
     @endif
-    @if (auth()->user()->tienePermiso('crear_permiso'))
+
+    {{-- @if (auth()->user()->tienePermiso('crear_permiso'))
         @include('gestionarUsuario.modals.permiso-crear')
-    @endif
-    @if (auth()->user()->tienePermiso('crear_empleado'))
+    @endif --}}
+
+    @if (auth()->user()->tienePermiso('ver_empleados'))
         @include('gestionarUsuario.modals.empleado-crear')
-    @endif
-    @if (auth()->user()->tienePermiso('editar_empleado'))
         @include('gestionarUsuario.modals.empleado-editar')
     @endif
     {{-- @if (auth()->user()->tienePermiso('crear_rol'))

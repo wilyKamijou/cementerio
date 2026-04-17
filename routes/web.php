@@ -41,27 +41,27 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sepulturero/dashboard', [SepultureroController::class, 'dashboard'])->name('sepulturero.dashboard');
 
     // ========== MÓDULO USUARIOS (SOLO ADMINISTRADOR) ==========
-    Route::prefix('admin')->name('admin.')->middleware(['permiso:ver_usuarios'])->group(function () {
+    Route::prefix('admin')->name('admin.')->middleware(['permiso.any:ver_usuarios,ver_empleados,ver_roles,ver_permisos,ver_roles_permisos'])->group(function () {
         Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
-        Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create')->middleware('permiso:crear_usuario');
-        Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store')->middleware('permiso:crear_usuario');
+        Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
+        Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
         Route::get('/usuarios/{id}', [UsuarioController::class, 'show'])->name('usuarios.show');
         //Route::get('/usuarios/{id}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit')->middleware('permiso:editar_usuario');
-        Route::put('/usuarios/{id}', [UsuarioController::class, 'update'])->name('usuarios.update')->middleware('permiso:editar_usuario');
-        Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy')->middleware('permiso:eliminar_usuario');
+        Route::put('/usuarios/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
+        Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
         //Route::post('/usuarios/{id}/asignar-rol', [UsuarioController::class, 'asignarRol'])->name('usuarios.asignar-rol')->middleware('permiso:asignar_rol');
     });
 
     // ========== MÓDULO ROLES (SOLO ADMINISTRADOR) ==========
     Route::prefix('admin')->name('admin.')->middleware(['permiso:ver_roles'])->group(function () {
         Route::get('/roles', [RolController::class, 'index'])->name('roles.index');
-        Route::get('/roles/create', [RolController::class, 'create'])->name('roles.create')->middleware('permiso:crear_rol');
-        Route::post('/roles', [RolController::class, 'store'])->name('roles.store')->middleware('permiso:crear_rol');
-        Route::get('/roles/{id}/edit', [RolController::class, 'edit'])->name('roles.edit')->middleware('permiso:editar_rol');
-        Route::put('/roles/{id}', [RolController::class, 'update'])->name('roles.update')->middleware('permiso:editar_rol');
-        Route::delete('/roles/{id}', [RolController::class, 'destroy'])->name('roles.destroy')->middleware('permiso:eliminar_rol');
-        Route::get('/roles/{id}/permisos', [RolController::class, 'permisos'])->name('roles.permisos')->middleware('permiso:asignar_permisos');
-        Route::put('/roles/{id}/permisos', [RolController::class, 'asignarPermisos'])->name('roles.asignar-permisos')->middleware('permiso:asignar_permisos');
+        Route::get('/roles/create', [RolController::class, 'create'])->name('roles.create');
+        Route::post('/roles', [RolController::class, 'store'])->name('roles.store');
+        Route::get('/roles/{id}/edit', [RolController::class, 'edit'])->name('roles.edit');
+        Route::put('/roles/{id}', [RolController::class, 'update'])->name('roles.update');
+        Route::delete('/roles/{id}', [RolController::class, 'destroy'])->name('roles.destroy');
+        Route::get('/roles/{id}/permisos', [RolController::class, 'permisos'])->name('roles.permisos');
+        Route::put('/roles/{id}/permisos', [RolController::class, 'asignarPermisos'])->name('roles.asignar-permisos');
     });
 
     // ========== MÓDULO PERMISOS (SOLO ADMINISTRADOR) ==========
@@ -77,71 +77,71 @@ Route::middleware(['auth'])->group(function () {
     // ========== MÓDULO EMPLEADOS (SOLO ADMINISTRADOR) ==========
     Route::prefix('admin')->name('admin.')->middleware(['permiso:ver_empleados'])->group(function () {
         Route::get('/empleados', [EmpleadoController::class, 'index'])->name('empleados.index');
-        Route::get('/empleados/create', [EmpleadoController::class, 'create'])->name('empleados.create')->middleware('permiso:crear_empleado');
-        Route::post('/empleados', [EmpleadoController::class, 'store'])->name('empleados.store')->middleware('permiso:crear_empleado');
-        Route::get('/empleados/{id}', [EmpleadoController::class, 'show'])->name('empleados.show')->middleware('permiso:editar_empleado');
-        Route::put('/empleados/{id}', [EmpleadoController::class, 'update'])->name('empleados.update')->middleware('permiso:editar_empleado');
-        Route::delete('/empleados/{id}', [EmpleadoController::class, 'destroy'])->name('empleados.destroy')->middleware('permiso:eliminar_empleado');
+        Route::get('/empleados/create', [EmpleadoController::class, 'create'])->name('empleados.create');
+        Route::post('/empleados', [EmpleadoController::class, 'store'])->name('empleados.store');
+        Route::get('/empleados/{id}', [EmpleadoController::class, 'show'])->name('empleados.show');
+        Route::put('/empleados/{id}', [EmpleadoController::class, 'update'])->name('empleados.update');
+        Route::delete('/empleados/{id}', [EmpleadoController::class, 'destroy'])->name('empleados.destroy');
     });
 
     // ========== MÓDULO ESPACIOS (SOLO ADMINISTRADOR) ==========
     Route::prefix('admin')->name('admin.')->middleware(['permiso.any:ver_espacios,ver_cementerios,ver_dimensiones,ver_direcciones'])->group(function () {
         Route::get('/espacios', [EspacioController::class, 'index'])->name('espacios.index');
-        Route::get('/espacios/create', [EspacioController::class, 'create'])->name('espacios.create')->middleware('permiso:crear_espacio');
-        Route::post('/espacios', [EspacioController::class, 'store'])->name('espacios.store')->middleware('permiso:crear_espacio');
-        Route::get('/espacios/{id}', [EspacioController::class, 'show'])->name('espacios.show')->middleware('permiso:editar_espacio');
-        Route::put('/espacios/{id}', [EspacioController::class, 'update'])->name('espacios.update')->middleware('permiso:editar_espacio');
-        Route::delete('/espacios/{id}', [EspacioController::class, 'destroy'])->name('espacios.destroy')->middleware('permiso:eliminar_espacio');
+        Route::get('/espacios/create', [EspacioController::class, 'create'])->name('espacios.create');
+        Route::post('/espacios', [EspacioController::class, 'store'])->name('espacios.store');
+        Route::get('/espacios/{id}', [EspacioController::class, 'show'])->name('espacios.show');
+        Route::put('/espacios/{id}', [EspacioController::class, 'update'])->name('espacios.update');
+        Route::delete('/espacios/{id}', [EspacioController::class, 'destroy'])->name('espacios.destroy');
     });
 
     // ========== MÓDULO CLIENTES (ADMINISTRADOR Y CAJERO) ==========
     Route::prefix('admin')->name('admin.')->middleware(['permiso:ver_clientes'])->group(function () {
         Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
-        Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create')->middleware('permiso:crear_cliente');
-        Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store')->middleware('permiso:crear_cliente');
-        Route::get('/clientes/{id}/edit', [ClienteController::class, 'edit'])->name('clientes.edit')->middleware('permiso:editar_cliente');
-        Route::put('/clientes/{id}', [ClienteController::class, 'update'])->name('clientes.update')->middleware('permiso:editar_cliente');
-        Route::delete('/clientes/{id}', [ClienteController::class, 'destroy'])->name('clientes.destroy')->middleware('permiso:eliminar_cliente');
+        Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
+        Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store');
+        Route::get('/clientes/{id}/edit', [ClienteController::class, 'edit'])->name('clientes.edit');
+        Route::put('/clientes/{id}', [ClienteController::class, 'update'])->name('clientes.update');
+        Route::delete('/clientes/{id}', [ClienteController::class, 'destroy'])->name('clientes.destroy');
     });
 
     // ========== MÓDULO CONTRATOS (ADMINISTRADOR Y CAJERO) ==========
     Route::prefix('admin')->name('admin.')->middleware(['permiso:ver_contratos'])->group(function () {
         Route::get('/contratos', [ContratoController::class, 'index'])->name('contratos.index');
-        Route::get('/contratos/create', [ContratoController::class, 'create'])->name('contratos.create')->middleware('permiso:crear_contrato');
-        Route::post('/contratos', [ContratoController::class, 'store'])->name('contratos.store')->middleware('permiso:crear_contrato');
-        Route::get('/contratos/{id}/edit', [ContratoController::class, 'edit'])->name('contratos.edit')->middleware('permiso:editar_contrato');
-        Route::put('/contratos/{id}', [ContratoController::class, 'update'])->name('contratos.update')->middleware('permiso:editar_contrato');
-        Route::delete('/contratos/{id}', [ContratoController::class, 'destroy'])->name('contratos.destroy')->middleware('permiso:eliminar_contrato');
+        Route::get('/contratos/create', [ContratoController::class, 'create'])->name('contratos.create');
+        Route::post('/contratos', [ContratoController::class, 'store'])->name('contratos.store');
+        Route::get('/contratos/{id}/edit', [ContratoController::class, 'edit'])->name('contratos.edit');
+        Route::put('/contratos/{id}', [ContratoController::class, 'update'])->name('contratos.update');
+        Route::delete('/contratos/{id}', [ContratoController::class, 'destroy'])->name('contratos.destroy');
     });
 
     // ========== MÓDULO PAGOS (ADMINISTRADOR Y CAJERO) ==========
     Route::prefix('admin')->name('admin.')->middleware(['permiso:ver_pagos'])->group(function () {
         Route::get('/pagos', [PagoController::class, 'index'])->name('pagos.index');
-        Route::get('/pagos/create', [PagoController::class, 'create'])->name('pagos.create')->middleware('permiso:crear_pago');
-        Route::post('/pagos', [PagoController::class, 'store'])->name('pagos.store')->middleware('permiso:crear_pago');
-        Route::get('/pagos/{id}/edit', [PagoController::class, 'edit'])->name('pagos.edit')->middleware('permiso:editar_pago');
-        Route::put('/pagos/{id}', [PagoController::class, 'update'])->name('pagos.update')->middleware('permiso:editar_pago');
-        Route::delete('/pagos/{id}', [PagoController::class, 'destroy'])->name('pagos.destroy')->middleware('permiso:eliminar_pago');
+        Route::get('/pagos/create', [PagoController::class, 'create'])->name('pagos.create');
+        Route::post('/pagos', [PagoController::class, 'store'])->name('pagos.store');
+        Route::get('/pagos/{id}/edit', [PagoController::class, 'edit'])->name('pagos.edit');
+        Route::put('/pagos/{id}', [PagoController::class, 'update'])->name('pagos.update');
+        Route::delete('/pagos/{id}', [PagoController::class, 'destroy'])->name('pagos.destroy');
     });
 
     // ========== MÓDULO INHUMACIONES (ADMINISTRADOR Y OPERADOR) ==========
     Route::prefix('admin')->name('admin.')->middleware(['permiso:ver_inhumaciones'])->group(function () {
         Route::get('/inhumaciones', [InhumacionController::class, 'index'])->name('inhumaciones.index');
-        Route::get('/inhumaciones/create', [InhumacionController::class, 'create'])->name('inhumaciones.create')->middleware('permiso:crear_inhumacion');
-        Route::post('/inhumaciones', [InhumacionController::class, 'store'])->name('inhumaciones.store')->middleware('permiso:crear_inhumacion');
-        Route::get('/inhumaciones/{id}', [InhumacionController::class, 'show'])->name('inhumaciones.show')->middleware('permiso:editar_inhumacion');
-        Route::put('/inhumaciones/{id}', [InhumacionController::class, 'update'])->name('inhumaciones.update')->middleware('permiso:editar_inhumacion');
-        Route::delete('/inhumaciones/{id}', [InhumacionController::class, 'destroy'])->name('inhumaciones.destroy')->middleware('permiso:eliminar_inhumacion');
+        Route::get('/inhumaciones/create', [InhumacionController::class, 'create'])->name('inhumaciones.create');
+        Route::post('/inhumaciones', [InhumacionController::class, 'store'])->name('inhumaciones.store');
+        Route::get('/inhumaciones/{id}', [InhumacionController::class, 'show'])->name('inhumaciones.show');
+        Route::put('/inhumaciones/{id}', [InhumacionController::class, 'update'])->name('inhumaciones.update');
+        Route::delete('/inhumaciones/{id}', [InhumacionController::class, 'destroy'])->name('inhumaciones.destroy');
     });
 
     // ========== MÓDULO MANTENIMIENTO (ADMINISTRADOR Y OPERADOR) ==========
     Route::prefix('admin')->name('admin.')->middleware(['permiso:ver_mantenimientos'])->group(function () {
         Route::get('/mantenimientos', [MantenimientoController::class, 'index'])->name('mantenimientos.index');
-        Route::get('/mantenimientos/create', [MantenimientoController::class, 'create'])->name('mantenimientos.create')->middleware('permiso:crear_mantenimiento');
-        Route::post('/mantenimientos', [MantenimientoController::class, 'store'])->name('mantenimientos.store')->middleware('permiso:crear_mantenimiento');
-        Route::get('/mantenimientos/{id}', [MantenimientoController::class, 'show'])->name('mantenimientos.show')->middleware('permiso:editar_mantenimiento');
-        Route::put('/mantenimientos/{id}', [MantenimientoController::class, 'update'])->name('mantenimientos.update')->middleware('permiso:editar_mantenimiento');
-        Route::delete('/mantenimiento/{id}', [MantenimientoController::class, 'destroy'])->name('mantenimientos.destroy')->middleware('permiso:eliminar_mantenimiento');
+        Route::get('/mantenimientos/create', [MantenimientoController::class, 'create'])->name('mantenimientos.create');
+        Route::post('/mantenimientos', [MantenimientoController::class, 'store'])->name('mantenimientos.store');
+        Route::get('/mantenimientos/{id}', [MantenimientoController::class, 'show'])->name('mantenimientos.show');
+        Route::put('/mantenimientos/{id}', [MantenimientoController::class, 'update'])->name('mantenimientos.update');
+        Route::delete('/mantenimientos/{id}', [MantenimientoController::class, 'destroy'])->name('mantenimientos.destroy');
     });
 
     // ========== MÓDULO REPORTES (ADMINISTRADOR Y CAJERO) ==========
@@ -161,41 +161,41 @@ Route::middleware(['auth'])->group(function () {
     // ========== MÓDULO CEMENTERIOS (SOLO ADMINISTRADOR) ==========
     Route::prefix('admin')->name('admin.')->middleware(['permiso:ver_cementerios'])->group(function () {
         Route::get('/cementerios', [CementeriosController::class, 'index'])->name('cementerios.index');
-        Route::get('/cementerios/create', [CementeriosController::class, 'create'])->name('cementerios.create')->middleware('permiso:crear_cementerio');
-        Route::post('/cementerios', [CementeriosController::class, 'store'])->name('cementerios.store')->middleware('permiso:crear_cementerio');
-        Route::get('/cementerios/{id}', [CementeriosController::class, 'show'])->name('cementerios.show')->middleware('permiso:editar_cementerio');
-        Route::put('/cementerios/{id}', [CementeriosController::class, 'update'])->name('cementerios.update')->middleware('permiso:editar_cementerio');
-        Route::delete('/cementerios/{id}', [CementeriosController::class, 'destroy'])->name('cementerios.destroy')->middleware('permiso:eliminar_cementerio');
+        Route::get('/cementerios/create', [CementeriosController::class, 'create'])->name('cementerios.create');
+        Route::post('/cementerios', [CementeriosController::class, 'store'])->name('cementerios.store');
+        Route::get('/cementerios/{id}', [CementeriosController::class, 'show'])->name('cementerios.show');
+        Route::put('/cementerios/{id}', [CementeriosController::class, 'update'])->name('cementerios.update');
+        Route::delete('/cementerios/{id}', [CementeriosController::class, 'destroy'])->name('cementerios.destroy');
     });
 
     // ========== MÓDULO DIMENSIONES (SOLO ADMINISTRADOR) ==========
     Route::prefix('admin')->name('admin.')->middleware(['permiso:ver_dimensiones'])->group(function () {
         Route::get('/dimensiones', [DimensionController::class, 'index'])->name('dimensiones.index');
-        Route::get('/dimensiones/create', [DimensionController::class, 'create'])->name('dimensiones.create')->middleware('permiso:crear_dimension');
-        Route::post('/dimensiones', [DimensionController::class, 'store'])->name('dimensiones.store')->middleware('permiso:crear_dimension');
-        Route::get('/dimensiones/{id}', [DimensionController::class, 'show'])->name('dimensiones.show')->middleware('permiso:editar_dimension');
-        Route::put('/dimensiones/{id}', [DimensionController::class, 'update'])->name('dimensiones.update')->middleware('permiso:editar_dimension');
-        Route::delete('/dimensiones/{id}', [DimensionController::class, 'destroy'])->name('dimensiones.destroy')->middleware('permiso:eliminar_dimension');
+        Route::get('/dimensiones/create', [DimensionController::class, 'create'])->name('dimensiones.create');
+        Route::post('/dimensiones', [DimensionController::class, 'store'])->name('dimensiones.store');
+        Route::get('/dimensiones/{id}', [DimensionController::class, 'show'])->name('dimensiones.show');
+        Route::put('/dimensiones/{id}', [DimensionController::class, 'update'])->name('dimensiones.update');
+        Route::delete('/dimensiones/{id}', [DimensionController::class, 'destroy'])->name('dimensiones.destroy');
     });
 
     // ========== MÓDULO DIRECCIONES (SOLO ADMINISTRADOR) ==========
     Route::prefix('admin')->name('admin.')->middleware(['permiso:ver_direcciones'])->group(function () {
         Route::get('/direcciones', [DireccionController::class, 'index'])->name('direcciones.index');
-        Route::get('/direcciones/create', [DireccionController::class, 'create'])->name('direcciones.create')->middleware('permiso:crear_direccion');
-        Route::post('/direcciones', [DireccionController::class, 'store'])->name('direcciones.store')->middleware('permiso:crear_direccion');
-        Route::get('/direcciones/{id}', [DireccionController::class, 'show'])->name('direcciones.show')->middleware('permiso:editar_direccion');
-        Route::put('/direcciones/{id}', [DireccionController::class, 'update'])->name('direcciones.update')->middleware('permiso:editar_direccion');
-        Route::delete('/direcciones/{id}', [DireccionController::class, 'destroy'])->name('direcciones.destroy')->middleware('permiso:eliminar_direccion');
+        Route::get('/direcciones/create', [DireccionController::class, 'create'])->name('direcciones.create');
+        Route::post('/direcciones', [DireccionController::class, 'store'])->name('direcciones.store');
+        Route::get('/direcciones/{id}', [DireccionController::class, 'show'])->name('direcciones.show');
+        Route::put('/direcciones/{id}', [DireccionController::class, 'update'])->name('direcciones.update');
+        Route::delete('/direcciones/{id}', [DireccionController::class, 'destroy'])->name('direcciones.destroy');
     });
 
     // ========== MÓDULO DIRECCIONES (SOLO ADMINISTRADOR) ==========
     Route::prefix('admin')->name('admin.')->middleware(['permiso:ver_tipo_inhumaciones'])->group(function () {
         Route::get('/tipo_inhumaciones', [TipoInhumacionController::class, 'index'])->name('tipo_inhumaciones.index');
-        Route::get('/tipo_inhumaciones/create', [TipoInhumacionController::class, 'create'])->name('tipo_inhumaciones.create')->middleware('permiso:crear_tipo_inhumacion');
-        Route::post('/tipo_inhumaciones', [TipoInhumacionController::class, 'store'])->name('tipo_inhumaciones.store')->middleware('permiso:crear_tipo_inhumacion');
-        Route::get('/tipo_inhumaciones/{id}', [TipoInhumacionController::class, 'show'])->name('tipo_inhumaciones.show')->middleware('permiso:editar_tipo_inhumacion');
-        Route::put('/tipo_inhumaciones/{id}', [TipoInhumacionController::class, 'update'])->name('tipo_inhumaciones.update')->middleware('permiso:editar_tipo_inhumacion');
-        Route::delete('/tipo_inhumaciones/{id}', [TipoInhumacionController::class, 'destroy'])->name('tipo_inhumaciones.destroy')->middleware('permiso:eliminar_tipo_inhumacion');
+        Route::get('/tipo_inhumaciones/create', [TipoInhumacionController::class, 'create'])->name('tipo_inhumaciones.create');
+        Route::post('/tipo_inhumaciones', [TipoInhumacionController::class, 'store'])->name('tipo_inhumaciones.store');
+        Route::get('/tipo_inhumaciones/{id}', [TipoInhumacionController::class, 'show'])->name('tipo_inhumaciones.show');
+        Route::put('/tipo_inhumaciones/{id}', [TipoInhumacionController::class, 'update'])->name('tipo_inhumaciones.update');
+        Route::delete('/tipo_inhumaciones/{id}', [TipoInhumacionController::class, 'destroy'])->name('tipo_inhumaciones.destroy');
     });
 });
 require __DIR__ . '/auth.php';

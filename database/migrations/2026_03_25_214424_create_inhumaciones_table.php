@@ -19,9 +19,9 @@ return new class extends Migration
             $table->date('fechaDefun'); // fechaDefun
             $table->date('fechaInhuma'); // fechainhuma
             $table->string('causaMuer')->nullable(); // causaMuer
-            
-            $table->foreignId('idEspacio')->unique()->constrained('espacios','idEspacio');
-            $table->foreignId('idTipo')->unique()->constrained('tipoInhumacion','idTipo');
+
+            $table->foreignId('idEspacio')->constrained('espacios', 'idEspacio');
+            $table->foreignId('idTipo')->constrained('tipoInhumacion', 'idTipo');
             $table->timestamps();
         });
     }

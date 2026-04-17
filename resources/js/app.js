@@ -20,7 +20,10 @@ import './espacios/cementerio-editar.js'
 import './espacios/dimension-editar.js'
 import './espacios/direccion-editar.js'
 import './espacios/espacio-editar.js'
-
+// gestion de inhumaciones
+import './inhumaciones/inhumaciones-crear.js';
+import './inhumaciones/mantenimientos-crear.js';
+import './inhumaciones/tipo-inhumaciones-crear.js';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;

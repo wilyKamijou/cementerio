@@ -11,12 +11,12 @@ return new class extends Migration
     {
         Schema::create('mantenimientos', function (Blueprint $table) {
             $table->id('idMant'); // IdMantenimiento
-            $table->foreignId('idEspacio')->constrained('espacios','idEspacio');
+            $table->foreignId('idEspacio')->constrained('espacios', 'idEspacio');
             $table->decimal('precio', 10, 2);
             $table->date('fechaMant');
             $table->text('descripcion')->nullable();
             $table->string('estado');
-            $table->string('tipo');
+            $table->string('tipo')->nullable();
             $table->timestamps();
         });
     }

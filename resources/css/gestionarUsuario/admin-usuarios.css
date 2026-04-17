@@ -36,7 +36,10 @@
 #buscarEspacio,
 #buscarCementerio,
 #buscarDimension,
-#buscarDireccion {
+#buscarDireccion,
+#buscarInhumacion,
+#buscarTipoInhumacion,
+#buscarMantenimiento {
     width: 100%;
     max-width: 350px;
     padding: 10px 16px;

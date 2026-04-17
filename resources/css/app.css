@@ -24,6 +24,13 @@
 @import 'espacios/dimension-editar.css';
 @import 'espacios/direccion-editar.css';
 @import 'espacios/espacio-editar.css';
+/* modals de inhumaciones */
+@import 'inhumaciones/inhumaciones-crear.css';
+@import 'inhumaciones/inhumaciones-editar.css';
+@import 'inhumaciones/mantenimientos-crear.css';
+@import 'inhumaciones/mantenimientos-editar.css';
+@import 'inhumaciones/tipo-inhumaciones-crear.css';
+@import 'inhumaciones/tipo-inhumaciones-editar.css';
 
 /* 2. DESPUÉS Tailwind */
 @tailwind base;

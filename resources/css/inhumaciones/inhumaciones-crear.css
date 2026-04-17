@@ -1,0 +1,367 @@
+/* resources/css/modules/inhumaciones.css */
+
+/* ========== MODAL CREAR INHUMACIÓN - ESTILO MODERNO ========== */
+
+/* Fondo del modal con DIFUMINADO */
+#modalCrearInhumacion {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+/* Animación de entrada del fondo */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+
+    to {
+        opacity: 1;
+        backdrop-filter: blur(10px);
+    }
+}
+
+#modalCrearInhumacion.fade {
+    animation: modalFadeIn 0.25s ease-out;
+}
+
+/* Backdrop difuminado */
+#modalCrearInhumacion .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+/* Contenido del modal */
+#modalCrearInhumacion .modal-content {
+    border-radius: 24px;
+    border: none;
+    overflow: hidden;
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    backdrop-filter: none;
+}
+
+/* Animación de deslizamiento para el contenido */
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-40px) scale(0.96);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+#modalCrearInhumacion .modal-content {
+    animation: modalSlideIn 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+/* Ancho del modal */
+#modalCrearInhumacion .modal-dialog {
+    max-width: 1200px;
+}
+
+/* Cabecera */
+#modalCrearInhumacion .modal-header {
+    background: linear-gradient(135deg, #1a472a 0%, #2d6a4f 50%, #40916c 100%);
+    padding: 1.5rem;
+    border-bottom: none;
+    position: relative;
+    overflow: hidden;
+}
+
+#modalCrearInhumacion .modal-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+#modalCrearInhumacion .modal-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+#modalCrearInhumacion .modal-title i {
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    border-radius: 50%;
+}
+
+/* Botón cerrar (X) */
+#modalCrearInhumacion .btn-close {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    padding: 8px;
+    opacity: 0.8;
+    transition: all 0.2s;
+}
+
+#modalCrearInhumacion .btn-close:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+/* Títulos de sección */
+#modalCrearInhumacion h6 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1a472a;
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e8f5e9;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+#modalCrearInhumacion h6 i {
+    margin-right: 8px;
+    color: #2d6a4f;
+}
+
+/* Body del modal */
+#modalCrearInhumacion .modal-body {
+    padding: 1.75rem;
+}
+
+/* Grupos de formulario */
+#modalCrearInhumacion .mb-3 {
+    margin-bottom: 1.25rem;
+}
+
+#modalCrearInhumacion label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #1a472a;
+    letter-spacing: 0.3px;
+}
+
+#modalCrearInhumacion label .text-danger {
+    color: #ef4444;
+}
+
+/* Inputs modernos */
+#modalCrearInhumacion .form-control,
+#modalCrearInhumacion .form-select {
+    border-radius: 14px;
+    border: 2px solid #e2e8f0;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    background: #fafbfc;
+    width: 100%;
+}
+
+#modalCrearInhumacion .form-control:hover,
+#modalCrearInhumacion .form-select:hover {
+    border-color: #cbd5e1;
+    background: white;
+}
+
+#modalCrearInhumacion .form-control:focus,
+#modalCrearInhumacion .form-select:focus {
+    border-color: #2d6a4f;
+    box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.15);
+    outline: none;
+    background: white;
+}
+
+/* Selects personalizados */
+#modalCrearInhumacion select.form-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232d6a4f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+/* Input date */
+#modalCrearInhumacion input[type="date"] {
+    cursor: pointer;
+}
+
+/* Texto de ayuda */
+#modalCrearInhumacion .form-text {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 6px;
+    font-size: 0.7rem;
+    color: #64748b;
+}
+
+#modalCrearInhumacion .form-text i {
+    font-size: 0.65rem;
+    color: #2d6a4f;
+}
+
+/* Footer del modal */
+#modalCrearInhumacion .modal-footer {
+    padding: 1rem 1.75rem 1.75rem 1.75rem;
+    border-top: 1px solid #e2e8f0;
+    background: transparent;
+    gap: 12px;
+}
+
+/* Botones */
+#modalCrearInhumacion .btn {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+#modalCrearInhumacion .btn-secondary {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+#modalCrearInhumacion .btn-secondary:hover {
+    background: #e2e8f0;
+    transform: translateY(-1px);
+    color: #1e293b;
+}
+
+#modalCrearInhumacion .btn-success {
+    background: linear-gradient(135deg, #1a472a 0%, #2d6a4f 100%);
+    border: none;
+    color: white;
+    box-shadow: 0 2px 8px rgba(26, 71, 42, 0.25);
+}
+
+#modalCrearInhumacion .btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(26, 71, 42, 0.35);
+}
+
+#modalCrearInhumacion .btn i {
+    margin-right: 6px;
+}
+
+/* Estado de carga del botón */
+#modalCrearInhumacion .btn-success:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#modalCrearInhumacion .btn-success .fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Layout responsivo */
+#modalCrearInhumacion .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -0.5rem;
+}
+
+#modalCrearInhumacion .col-md-3 {
+    flex: 0 0 auto;
+    width: 25%;
+    padding: 0 0.5rem;
+}
+
+#modalCrearInhumacion .col-md-4 {
+    flex: 0 0 auto;
+    width: 33.33333333%;
+    padding: 0 0.5rem;
+}
+
+#modalCrearInhumacion .col-md-6 {
+    flex: 0 0 auto;
+    width: 50%;
+    padding: 0 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    #modalCrearInhumacion .modal-dialog {
+        max-width: 95%;
+    }
+
+    #modalCrearInhumacion .col-md-3,
+    #modalCrearInhumacion .col-md-4 {
+        width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    #modalCrearInhumacion .modal-body {
+        padding: 1.25rem;
+    }
+
+    #modalCrearInhumacion .modal-footer {
+        flex-direction: column;
+        padding: 1rem 1.25rem 1.25rem 1.25rem;
+    }
+
+    #modalCrearInhumacion .modal-footer .btn {
+        width: 100%;
+    }
+
+    #modalCrearInhumacion .modal-header {
+        padding: 1rem;
+    }
+
+    #modalCrearInhumacion .modal-title {
+        font-size: 1.1rem;
+    }
+
+    #modalCrearInhumacion .modal-title i {
+        font-size: 1.2rem;
+        padding: 6px;
+    }
+
+    #modalCrearInhumacion .col-md-3,
+    #modalCrearInhumacion .col-md-4,
+    #modalCrearInhumacion .col-md-6 {
+        width: 100%;
+    }
+
+    #modalCrearInhumacion h6 {
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Placeholder styling */
+#modalCrearInhumacion .form-control::placeholder {
+    color: #cbd5e1;
+    font-size: 0.85rem;
+}
+
+#modalCrearInhumacion .mt-3 {
+    margin-top: 1rem;
+}
